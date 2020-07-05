@@ -1,6 +1,6 @@
 <?php
 
-class Styleparameter extends CI_Controller{
+class NormaStyle extends CI_Controller{
     public function __construct()
     {
          parent::__construct();
@@ -9,11 +9,11 @@ class Styleparameter extends CI_Controller{
 
     public function index()
     {
-        $data['facet'] = $this->style_parametermodel->get_data();
+        $data['data'] = $this->normastylemodel->get_data();
 
         $this->load->view("administrator/header");
         $this->load->view("administrator/nav");        
-        $this->load->view("administrator/styleparameter/main", $data);
+        $this->load->view("administrator/normastyle/main", $data);
         $this->load->view("administrator/footer");
     }
 }

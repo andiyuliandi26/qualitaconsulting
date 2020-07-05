@@ -1,8 +1,8 @@
 <?php
 
-class Style_Parametermodel extends BaseModel{
+class Style_parametermodel extends BaseModel{
     const table = 'md_style_parameter';
-    public $selectedColumn = "md_big5.Nama as Big5Desc, md_big5.MatriksLow, md_big5.MatriksAverage, md_big5.MatriksHigh";
+    public $selectedColumn = "md_style_parameter.Style as StyleDesc";
     public $Nama;
     public $MatriksLow;
     public $MatriksAverage;

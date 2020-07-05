@@ -19,6 +19,9 @@
                     <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/facet">Facet</a>
                     <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/styleparameter">Style Parameter</a>
                     <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/pernyataan">Pernyataan</a>
+                    <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/normabig5">Norma Big 5</a>
+                    <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/normafacet">Norma Facet</a>
+                    <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/normastyle">Norma Style</a>
                 </div>
             </li>
             </ul>    
