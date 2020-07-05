@@ -1,6 +1,6 @@
 <?php
 
-class NormaBig5 extends CI_Controller{
+class Normabig5 extends CI_Controller{
     public function __construct()
     {
          parent::__construct();

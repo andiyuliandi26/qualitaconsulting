@@ -1,6 +1,6 @@
 <?php
 
-class NormaStyle extends CI_Controller{
+class Normastyle extends CI_Controller{
     public function __construct()
     {
          parent::__construct();

@@ -1,6 +1,6 @@
 <?php
 
-class NormaFacet extends CI_Controller{
+class Normafacet extends CI_Controller{
     public function __construct()
     {
          parent::__construct();
