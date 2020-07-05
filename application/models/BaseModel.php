@@ -1,6 +1,6 @@
 <?php
 
-class BaseModel extends CI_Model{
+class Basemodel extends CI_Model{
     public $ID;
     public $CreatedDate;
     public $LastModifiedDate;
