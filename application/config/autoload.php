@@ -136,7 +136,8 @@ $autoload['model'] = array(
     'basemodel',
     'masterdata/big5model',
     'masterdata/facetmodel',
-    'masterdata/style_parametermodel'
+    'masterdata/style_parametermodel',
+    'masterdata/pernyataanmodel'
 
 );
 
