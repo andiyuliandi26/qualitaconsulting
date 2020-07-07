@@ -13,7 +13,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url();?>assets/css/cosmo/bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo base_url();?>assets/css/chartjs/chart.min.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>assets/css/chartjs/Chart.min.css" rel="stylesheet">
     
     <!-- Custom Fonts -->
     <link href="<?php echo base_url();?>assets/css/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -30,7 +30,7 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url();?>assets/js/chartjs/chart.bundle.min.js"></script>
+    <script src="<?php echo base_url();?>assets/js/chartjs/Chart.bundle.min.js"></script>
 </head>
 
 <body>
