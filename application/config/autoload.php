@@ -141,6 +141,9 @@ $autoload['model'] = array(
     'masterdata/normabig5model',
     'masterdata/normafacetmodel',
     'masterdata/normastylemodel',
+    'peserta/pesertamodel',
+    'peserta/clientmodel',
+    'peserta/resultsmodel',
 
 );
 
