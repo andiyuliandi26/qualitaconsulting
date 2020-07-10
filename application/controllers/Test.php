@@ -19,6 +19,21 @@ class Test extends MY_Controller {
     }
 
     private function _inputProfile() {
-        $this->load_view('peserta/input-profile');
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $this->_showProfile();
+        }
+        else {
+            $this->load_view('peserta/input-profile');
+        }
+    }
+
+    private function _showProfile() {
+        $this->load_view('peserta/profile');
+    }
+
+    public function start() {
+        $token = $this->input->post('token');
+
+        if (!$token) redirect('test');
     }
 }
