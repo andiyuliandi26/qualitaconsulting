@@ -25,11 +25,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 // $config['base_url'] = 'http://localhost:8888/qualitaconsulting/';
 $config['base_url'] = 'http://dev.qualitaconsulting.co.id';
-<<<<<<< HEAD
+
 //$config['base_url'] = 'http://devlocal.qualitaconsulting.co.id';
 
-=======
->>>>>>> a78c15f0ebaab0ddbba39ef22524788c2a2d3cd0
 /*
 |--------------------------------------------------------------------------
 | Index File
