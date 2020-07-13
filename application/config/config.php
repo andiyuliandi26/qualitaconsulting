@@ -23,9 +23,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
+// $config['base_url'] = 'http://localhost:8888/qualitaconsulting/';
 $config['base_url'] = 'http://dev.qualitaconsulting.co.id';
+<<<<<<< HEAD
 //$config['base_url'] = 'http://devlocal.qualitaconsulting.co.id';
 
+=======
+>>>>>>> a78c15f0ebaab0ddbba39ef22524788c2a2d3cd0
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -36,7 +40,7 @@ $config['base_url'] = 'http://dev.qualitaconsulting.co.id';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
