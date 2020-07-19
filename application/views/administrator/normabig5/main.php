@@ -1,14 +1,14 @@
 
 <div class="card m-3">
     <div class="card-header">
-        <h2 class="card-title">Data Norma Big 5</h2>
+        <h4 class="card-title">Data Norma Domain Big 5</h4>
     </div>
     <div class="card-body">
         <table width="100%" class="table table-bordered table-striped">
-            <thead class="thead-dark">
+            <thead class="thead-dark text-center">
                 <tr>
-                    <th>ID</th>
-                    <th>Big 5</th>
+                    <th>Action</th>
+                    <th>Domain</th>
                     <th>Jenis Kelamin</th>
                     <th>Batas Bawah</th>
                     <th>Batas Atas</th>
@@ -19,13 +19,15 @@
             <tbody>
                 <?php  foreach($data as $items): ?>
                     <tr>
-                        <td><?php echo $items->ID; ?></td>
-                        <td><?php echo $items->Big5Desc; ?></td>
-                        <td><?php echo $items->JenisKelamin; ?></td>
-                        <td><?php echo $items->BatasBawah; ?></td>
-                        <td><?php echo $items->BatasAtas; ?></td>
-                        <td><?php echo $items->Lfs; ?></td>
-                        <td><?php echo $items->Matriks; ?></td>
+                        <td style="width:3%;" class="text-center">
+                            <a href="<?php echo base_url()."administrator/normabig5/update/{$items->ID}"; ?>" class="btn btn-sm btn-outline-primary">Edit</a>
+                        </td>
+                        <td style="width:10%;" ><?php echo $items->Big5Desc; ?></td>
+                        <td style="width:5%;" ><?php echo $items->JenisKelamin; ?></td>
+                        <td style="width:10%;" class="text-center"><?php echo $items->BatasBawah; ?></td>
+                        <td style="width:10%;" class="text-center"><?php echo $items->BatasAtas; ?></td>
+                        <td style="width:10%;" ><?php echo $items->Lfs; ?></td>
+                        <td style="width:5%;" class="text-center"><?php echo $items->Matriks; ?></td>
                     </tr>
                 <?php endforeach?>
             </tbody>

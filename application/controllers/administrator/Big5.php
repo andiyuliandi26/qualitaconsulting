@@ -1,21 +1,35 @@
 <?php
 
-class Big5 extends CI_Controller{
+class Big5 extends MY_Controller{
     public function __construct()
     {
          parent::__construct();
-        //$this->load->model('big5model');
-        $this->load->helper('url_helper');
     }
 
     public function index()
     {
-        $data['big5'] = $this->big5model->get_data();
+        $data['data'] = $this->big5model->get_data();
+      
+        $this->load_administrator_view("administrator/big5/main", $data);
+    }
 
-        $this->load->view("administrator/header");
-        $this->load->view("administrator/nav");        
-        $this->load->view("administrator/big5/main", $data);
-        $this->load->view("administrator/footer");
+    public function update($id){
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('RedaksiLow', 'Redaksi Low', 'required');
+
+        $data['data'] = $this->big5model->get_data_byid($id);
+
+        if ($this->form_validation->run() === FALSE)
+        {
+            $this->load_administrator_view('/administrator/big5/update', $data);
+        }
+        else
+        {
+           if( $this->big5model->update_data($id)){
+                redirect(base_url("/administrator/big5/"));
+           }
+        }
     }
 }
 

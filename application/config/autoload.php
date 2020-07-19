@@ -103,7 +103,9 @@ $autoload['helper'] = array();
 | config files.  Otherwise, leave it blank.
 |
 */
-$autoload['config'] = array();
+$autoload['config'] = array(
+    'form_validation'
+);
 
 /*
 | -------------------------------------------------------------------
@@ -143,6 +145,7 @@ $autoload['model'] = array(
     'masterdata/normastylemodel',
     'peserta/pesertamodel',
     'peserta/clientmodel',
+    'peserta/clientbatchmodel',
     'peserta/resultsmodel',
 
 );

@@ -60,13 +60,13 @@
                             <tr>
                                 <td><?php if($resultbig5[$index]->LfsResult == 'Low') 
                                             echo 'Yes'; ?></td>
-                                <td><?php echo $items->KeteranganLow; ?></td>
+                                <td><?php echo $items->RedaksiLow; ?></td>
                                 <td><?php if($resultbig5[$index]->LfsResult == 'Average') 
                                             echo 'Yes'; ?></td>
-                                <td><?php echo $items->KeteranganAverage; ?></td>
+                                <td><?php echo $items->RedaksiAverage; ?></td>
                                 <td><?php if($resultbig5[$index]->LfsResult == 'High') 
                                             echo 'Yes'; ?></td>
-                                <td><?php echo $items->KeteranganHigh; ?></td>
+                                <td><?php echo $items->RedaksiHigh; ?></td>
                                 <td><?php echo $items->Kode; ?></td>
                                 <td><?php echo $resultbig5[$index]->LfsResult?></td>
                             </tr>

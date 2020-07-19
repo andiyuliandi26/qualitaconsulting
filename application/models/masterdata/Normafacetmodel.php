@@ -2,17 +2,42 @@
 
 class Normafacetmodel extends Basemodel{    
 
-    const table = 'md_norma_facet';
-
     public function get_data()
     {
-        $facet= new Facetmodel;
-        $this->db->select(self::table.'.*,'.$facet->selectedColumn);
-        $this->db->from(self::table);
-        $this->db->join('md_facet', self::table.'.FacetID = md_facet.ID');
+        $facet = new Facetmodel;
+        $this->db->select(self::TABLE_NORMA_FACET.'.*,'.$facet->selectedColumn)
+            ->from(self::TABLE_NORMA_FACET)
+            ->join(self::TABLE_FACET, self::TABLE_NORMA_FACET.'.FacetID = '.self::TABLE_FACET.'.ID');
+
+        return $this->db->get()->result_object();
+    }
+
+    public function get_data_byid($id)
+    {
+        $facet = new Facetmodel;
+        $this->db->select(self::TABLE_NORMA_FACET.'.*,'.$facet->selectedColumn)
+            ->from(self::TABLE_NORMA_FACET)
+            ->join(self::TABLE_FACET, self::TABLE_NORMA_FACET.'.FacetID = '.self::TABLE_FACET.'.ID')
+            ->where(self::TABLE_NORMA_FACET.".ID = {$id}");
+
+        return $this->db->get()->row_object();
+    }
+
+    public function update_data($id){
+        $data = array(
+            'BatasBawah' => $this->input->post('BatasBawah'),
+            'BatasAtas' => $this->input->post('BatasAtas')
+        );
         
-        $query = $this->db->get();
-        return $query->result_object();
+        $this->db->where('ID', $id);
+
+        if($this->db->update(self::TABLE_NORMA_FACET, $data)){
+            return true;
+        }else{
+            show_error("Terjadi kesalahan pada simpan data");
+            var_dump("test");
+            return false;
+        }
     }
 }
 
