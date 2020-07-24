@@ -128,6 +128,15 @@ class Clientbatchmodel extends Basemodel{
             return false;
         }
     }
+
+    public function validasi_token($token) {
+        $this->db->select('*')
+            ->from(self::TABLE_CLIENT_BATCH)
+            ->where('Token', $token)
+            ->limit(1);
+        
+        return $this->db->get()->row_object();
+    }
 }
 
 ?>
