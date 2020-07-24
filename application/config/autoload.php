@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array();
+$autoload['libraries'] = array('database','ion_auth');
 
 /*
 | -------------------------------------------------------------------
@@ -135,6 +135,7 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 $autoload['model'] = array(
+    'Ion_auth_model',
     'basemodel',
     'masterdata/big5model',
     'masterdata/facetmodel',
@@ -147,6 +148,7 @@ $autoload['model'] = array(
     'peserta/clientmodel',
     'peserta/clientbatchmodel',
     'peserta/resultsmodel',
+    'peserta/additionalreportmodel',
 
 );
 

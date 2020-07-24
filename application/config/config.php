@@ -24,9 +24,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = 'http://localhost:8888/qualitaconsulting/';
-$config['base_url'] = 'http://dev.qualitaconsulting.co.id';
+//$config['base_url'] = 'http://dev.qualitaconsulting.co.id';
 
-//$config['base_url'] = 'http://devlocal.qualitaconsulting.co.id';
+$config['base_url'] = 'http://devlocal.qualitaconsulting.co.id';
 
 /*
 |--------------------------------------------------------------------------

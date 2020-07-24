@@ -12,6 +12,7 @@ class Clientbatchmodel extends Basemodel{
     public $DurasiTest;
     public $Token;
     public $LinkTest;
+    public $selectedColumn = self::TABLE_CLIENT_BATCH.'.ClientID,'.self::TABLE_CLIENT_BATCH.'.NamaBatch,';
     #endregion
 
     public function get_data(){
