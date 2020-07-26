@@ -1,7 +1,7 @@
 <?php
 // import library dari REST_Controller
-require APPPATH . 'libraries\RestController.php';
-require APPPATH . 'libraries\Format.php';
+require APPPATH . 'libraries/RestController.php';
+require APPPATH . 'libraries/Format.php';
 
 // use namespace
 use chriskacerguis\RestServer\RestController;
@@ -17,7 +17,8 @@ class Testapi extends RestController
         $response['status']=200;
         $response['error']=false;
         $response['message']='Hai from response';// tampilkan response
-        $this->response($response);}
+        $this->response($response);
+    }
     
         public function user_get(){// testing response
         $response['status']=200;

@@ -1,7 +1,7 @@
 <?php
 // import library dari REST_Controller
-require APPPATH . 'libraries\RestController.php';
-require APPPATH . 'libraries\Format.php';
+require APPPATH . 'libraries/RestController.php';
+require APPPATH . 'libraries/Format.php';
 
 // use namespace
 use chriskacerguis\RestServer\RestController;
