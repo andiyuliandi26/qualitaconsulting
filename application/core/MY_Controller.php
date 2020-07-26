@@ -9,7 +9,7 @@ class MY_Controller extends CI_Controller{
         $this->load->helper('form');
         $this->load->helper('jwt');
         $this->load->library(array('ion_auth', 'form_validation'));
-        $this->load->library('pdfgenerator');
+        //$this->load->library('pdfgenerator');
  
 		$this->load->helper(array('url', 'language'));
 
