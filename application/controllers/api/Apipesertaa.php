@@ -6,7 +6,7 @@ require APPPATH . 'libraries\Format.php';
 // use namespace
 use chriskacerguis\RestServer\RestController;
 
-class ApiPeserta extends RestController
+class Apipeserta extends RestController
 {
     public function __construct(){
         parent::__construct();

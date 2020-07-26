@@ -6,7 +6,7 @@ require APPPATH . 'libraries\Format.php';
 // use namespace
 use chriskacerguis\RestServer\RestController;
 
-class TestApi extends RestController
+class Testapi extends RestController
 {
     public function __construct(){
         parent::__construct();
