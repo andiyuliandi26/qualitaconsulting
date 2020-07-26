@@ -4,7 +4,7 @@
         <h3 class="card-title">Data Client Batch</h3>
         <a href="<?php echo base_url(); ?>/administrator/peserta/clientbatch/create" class="btn btn-outline-primary"> Tambah </a>
     </div>
-    <div class="card-body">
+    <div class="card-body table-responsive-lg">
         <table width="100%" class="table table-bordered table-striped">
             <thead class="thead-dark">
                 <tr class="text-center">
@@ -42,9 +42,10 @@
                                 <label class="custom-control-label" for="customCheck1"></label>
                             </div>
                         </td>
-                        <td style="width:10%" class="text-center">
+                        <td style="width:25%" class="text-center">
                             <a href="<?php echo $linkTest; ?>" class="btn btn-sm btn-outline-primary" target="_blank">Goto Test</a>
                             <button class="btn btn-sm btn-outline-secondary copyClipboard" data-clipboard-text="<?php echo $linkTest; ?>">Copy Link</button>
+                            <button class="btn btn-sm btn-outline-info copyClipboard" data-clipboard-text="<?php echo $items->Token; ?>">Copy Token</button>
                         </td>
                     </tr>
                 <?php endforeach?>

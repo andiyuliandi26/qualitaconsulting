@@ -12,13 +12,14 @@ class Clientbatchmodel extends Basemodel{
     public $DurasiTest;
     public $Token;
     public $LinkTest;
-    public $selectedColumn = self::TABLE_CLIENT_BATCH.'.ClientID,'.self::TABLE_CLIENT_BATCH.'.NamaBatch,';
+    public $selectedColumn = self::TABLE_CLIENT_BATCH.'.ClientID,'.self::TABLE_CLIENT_BATCH.'.NamaBatch,'.self::TABLE_CLIENT_BATCH.'.Token as TokenTest';
     #endregion
 
     public function get_data(){
         $this->db->select(self::TABLE_CLIENT_BATCH.'.*, '.self::TABLE_CLIENT.'.NamaClient')
             ->from(self::TABLE_CLIENT_BATCH)
-            ->join(self::TABLE_CLIENT, self::TABLE_CLIENT.'.ID = '.self::TABLE_CLIENT_BATCH.'.ClientID');
+            ->join(self::TABLE_CLIENT, self::TABLE_CLIENT.'.ID = '.self::TABLE_CLIENT_BATCH.'.ClientID')
+            ->order_by(self::TABLE_CLIENT_BATCH.'.ID', 'DESC');
 
         return $this->db->get()->result_object();
     }
@@ -29,6 +30,16 @@ class Clientbatchmodel extends Basemodel{
             ->from(self::TABLE_CLIENT_BATCH)
             ->join(self::TABLE_CLIENT, self::TABLE_CLIENT.'.ID = '.self::TABLE_CLIENT_BATCH.'.ClientID')
             ->where(self::TABLE_CLIENT_BATCH.".ID = {$id}");
+
+        return $this->db->get()->row_object();
+    }
+
+    public function get_data_bytoken($token)
+    {
+        $this->db->select(self::TABLE_CLIENT_BATCH.'.*, '.self::TABLE_CLIENT.'.NamaClient')
+            ->from(self::TABLE_CLIENT_BATCH)
+            ->join(self::TABLE_CLIENT, self::TABLE_CLIENT.'.ID = '.self::TABLE_CLIENT_BATCH.'.ClientID')
+            ->where(self::TABLE_CLIENT_BATCH.".Token = '{$token}'");
 
         return $this->db->get()->row_object();
     }

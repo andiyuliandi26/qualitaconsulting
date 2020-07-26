@@ -8,16 +8,16 @@
 
         <?php echo form_open(base_url()."administrator/facet/update/{$data->ID}"); ?>
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-4 col-lg-1">
                 <div class="form-group">
                     <?php echo form_label('Domain', 'Domain'); ?>
                     <?php echo form_input('Domain',  $data->Big5Desc, 'class="form-control" readonly'); ?>
                 </div>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2 col-lg-1">
                 <div class="form-group">
                     <?php echo form_label('Nama', 'Nama'); ?>
-                    <?php echo form_input('Nama',  $data->Nama, 'class="form-control" readonly'); ?>
+                    <?php echo form_input('Nama',  $data->Nama, 'class="form-control"'); ?>
                 </div>
             </div>
             <div class="col-md-12">            

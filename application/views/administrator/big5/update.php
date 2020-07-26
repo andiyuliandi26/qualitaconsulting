@@ -8,34 +8,34 @@
 
         <?php echo form_open(base_url()."administrator/big5/update/{$data->ID}"); ?>
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-4 col-lg-2">
                 <div class="form-group">
-                    <?php echo form_label('Domain', 'Domain'); ?>
-                    <?php echo form_input('Domain',  $data->Nama, 'class="form-control" readonly'); ?>
+                    <?php echo form_label('Domain', 'Nama'); ?>
+                    <?php echo form_input('Nama',  $data->Nama, 'class="form-control"'); ?>
                 </div>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2 col-lg-1">
                 <div class="form-group">
                     <?php echo form_label('Kode', 'Kode'); ?>
-                    <?php echo form_input('Kode',  $data->Kode, 'class="form-control" readonly'); ?>
+                    <?php echo form_input('Kode',  $data->Kode, 'class="form-control"'); ?>
                 </div>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2 col-lg-1">
                 <div class="form-group">
                     <?php echo form_label('Matriks Low', 'Matriks1'); ?>
-                    <?php echo form_input('Matriks1',  $data->MatriksLow, 'class="form-control" readonly'); ?>
+                    <?php echo form_input('MatriksLow',  $data->MatriksLow, 'class="form-control"'); ?>
                 </div>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2 col-lg-2">
                 <div class="form-group">
                     <?php echo form_label('Matriks Average', 'Matriks2'); ?>
-                    <?php echo form_input('Matriks2',  $data->MatriksAverage, 'class="form-control" readonly'); ?>
+                    <?php echo form_input('MatriksAverage',  $data->MatriksAverage, 'class="form-control"'); ?>
                 </div>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2 col-lg-2">
                 <div class="form-group">
                     <?php echo form_label('Matriks High', 'Matriks2'); ?>
-                    <?php echo form_input('Matriks2',  $data->MatriksHigh, 'class="form-control" readonly'); ?>
+                    <?php echo form_input('MatriksHigh',  $data->MatriksHigh, 'class="form-control"'); ?>
                 </div>
             </div>
             <div class="col-md-12">            

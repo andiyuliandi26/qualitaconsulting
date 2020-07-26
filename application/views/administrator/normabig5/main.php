@@ -3,7 +3,7 @@
     <div class="card-header">
         <h4 class="card-title">Data Norma Domain Big 5</h4>
     </div>
-    <div class="card-body">
+    <div class="card-body table-responsive-lg">
         <table width="100%" class="table table-bordered table-striped">
             <thead class="thead-dark text-center">
                 <tr>
@@ -13,7 +13,7 @@
                     <th>Batas Bawah</th>
                     <th>Batas Atas</th>
                     <th>Lfs</th>
-                    <th>Matriks</th>
+                    <!-- <th>Matriks</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -27,7 +27,7 @@
                         <td style="width:10%;" class="text-center"><?php echo $items->BatasBawah; ?></td>
                         <td style="width:10%;" class="text-center"><?php echo $items->BatasAtas; ?></td>
                         <td style="width:10%;" ><?php echo $items->Lfs; ?></td>
-                        <td style="width:5%;" class="text-center"><?php echo $items->Matriks; ?></td>
+                        <!-- <td style="width:5%;" class="text-center"><?php //echo $items->Matriks; ?></td> -->
                     </tr>
                 <?php endforeach?>
             </tbody>

@@ -13,22 +13,22 @@
                     <?php echo form_input('KodeClient','', 'class="form-control" id="KodeClient"'); ?>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4 col-lg-2">
                 <div class="form-group">
                     <?php echo form_label('Nama Client', 'NamaClient'); ?>
                     <?php echo form_input('NamaClient', '', 'class="form-control" id="NamaClient"'); ?>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4 col-lg-2">
                 <div class="form-group">
                     <?php echo form_label('Kategori', 'Kategori'); ?>
                     <?php echo form_dropdown('Kategori', $kategori, '', 'class="custom-select"'); ?>
                 </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-12 col-lg-7">
                 <div class="form-group">
                     <?php echo form_label('Alamat', 'Alamat'); ?>
-                    <?php echo form_textarea(array('name' => 'Alamat', 'rows'=> '2', 'cols' => '10'), '', 'class="form-control"'); ?>
+                    <?php echo form_textarea(array('name' => 'Alamat', 'rows'=> '3', 'cols' => '10'), '', 'class="form-control"'); ?>
                 </div>
             </div>
         </div>

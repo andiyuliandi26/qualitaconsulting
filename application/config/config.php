@@ -25,9 +25,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 // $config['base_url'] = 'http://localhost:8888/qualitaconsulting/';
-//$config['base_url'] = 'http://dev.qualitaconsulting.co.id';
+$config['base_url'] = 'https://dev.qualitaconsulting.co.id';
 
-$config['base_url'] = 'http://devlocal.qualitaconsulting.co.id';
+//$config['base_url'] = 'https://devlocal.qualitaconsulting.co.id';
 
 /*
 |--------------------------------------------------------------------------
@@ -104,7 +104,7 @@ $config['charset'] = 'UTF-8';
 | setting this variable to TRUE (boolean).  See the user guide for details.
 |
 */
-$config['enable_hooks'] = FALSE;
+$config['enable_hooks'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------
@@ -404,10 +404,10 @@ $config['sess_regenerate_destroy'] = FALSE;
 |       'cookie_httponly') will also affect sessions.
 |
 */
-$config['cookie_prefix']	= '';
-$config['cookie_domain']	= '';
+$config['cookie_prefix']	= 'qualita';
+$config['cookie_domain']	= 'dev.qualitaconsulting.co.id';
 $config['cookie_path']		= '/';
-$config['cookie_secure']	= FALSE;
+$config['cookie_secure']	= TRUE;
 $config['cookie_httponly'] 	= FALSE;
 
 /*

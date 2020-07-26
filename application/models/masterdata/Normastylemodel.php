@@ -38,6 +38,26 @@ class Normastylemodel extends Basemodel{
             return false;
         }
     }
+
+    public function get_big5_matriks($big5Data, $big5ID, $lfsValue)
+    {
+        $returnMatriks = "";
+        $getIndex = array_search($big5ID, array_column($big5Data, 'ID'));
+
+        switch($lfsValue){
+            case 'Low':
+                $returnMatriks = $big5Data[$getIndex]->MatriksLow;
+                break;
+            case 'Average':
+                $returnMatriks = $big5Data[$getIndex]->MatriksAverage;
+                break;
+            case 'High':
+                $returnMatriks = $big5Data[$getIndex]->MatriksHigh;
+                break;           
+        }
+
+        return $returnMatriks;
+    }
 }
 
 

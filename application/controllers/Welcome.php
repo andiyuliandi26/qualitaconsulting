@@ -25,9 +25,14 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('header');
-		$this->load->view('administrator/nav');
+		$this->load->view('layouts/header');
+		if ($this->ion_auth->logged_in())
+		{
+			$this->load->view('layouts/nav');
+		}else{			
+			$this->load->view('layouts/nav_global');
+		}
 		$this->load->view('welcome_message');
-		$this->load->view('footer');
+		$this->load->view('layouts/footer');
 	}
 }

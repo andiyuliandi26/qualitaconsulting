@@ -8,13 +8,13 @@
 
         <?php echo form_open(base_url()."administrator/pernyataan/update/{$data->ID}"); ?>
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-4 col-lg-2">
                 <div class="form-group">
                     <?php echo form_label('Domain', 'Domain'); ?>
                     <?php echo form_input('Domain',  $data->Big5Desc, 'class="form-control" readonly'); ?>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4 col-lg-2">
                 <div class="form-group">
                     <?php echo form_label('Facet', 'FacetDesc'); ?>
                     <?php echo form_input('FacetDesc',  $data->FacetDesc, 'class="form-control" readonly'); ?>

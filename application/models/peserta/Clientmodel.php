@@ -2,8 +2,10 @@
 
 class Clientmodel extends Basemodel{    
 
+    public $selectedColumn = self::TABLE_CLIENT.'.KodeClient,'.self::TABLE_CLIENT.'.NamaClient';
+
     public $kategoriList = array(
-        'Perusahaan', 'Individu'
+        'Perusahaan' => 'Perusahaan', 'Individu' => 'Individu'
     );
     
     public function get_data()

@@ -8,7 +8,7 @@
 
         <?php echo form_open(base_url()."administrator/peserta/clientbatch/update/{$data->ID}"); ?>
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4 col-lg-3">
                 <div class="form-group">
                     <?php echo form_label('Nama Client', 'ClientID'); ?>
                     <?php echo form_dropdown("ClientID", $client_list, $data->ClientID, 'class="custom-select"');?>
@@ -24,12 +24,12 @@
                 </div>
                 
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3 col-lg-2">
                 <div class="form-group">
                     <?php echo form_label('Tanggal Test', 'TanggalTest'); ?>
                     <?php echo form_input('TanggalTest', $data->TanggalTest, 'class="form-control standardDate"'); ?>
                 </div></div>
-            <div class="col-md-2">
+            <div class="col-md-3 col-lg-2">
                 <div class="form-group">
                     <?php echo form_label('Jam Test', 'JamAwalTest'); ?>
                         <div class="input-group">                    
@@ -41,19 +41,19 @@
                         </div>
                 </div>
             </div>
-            <div class="col-md-1">            
+            <div class="col-md-3 col-lg-2">            
                 <div class="form-group">
                     <?php echo form_label('Total Peserta', 'TotalPeserta'); ?>
                     <?php echo form_input('TotalPeserta', $data->TotalPeserta, 'class="form-control"'); ?>
                 </div>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-3 col-lg-1">
                 <div class="form-group">
                     <?php echo form_label('Durasi Test', 'DurasiTest'); ?>
                     <?php echo form_input('DurasiTest', $data->DurasiTest, 'class="form-control"'); ?>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6 col-lg-4">
                 <div class="form-group">
                     <?php echo form_label('Token', 'Token'); ?>
                     <div class="input-group">                        

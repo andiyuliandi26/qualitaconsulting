@@ -18,7 +18,13 @@ class Basemodel extends CI_Model{
     protected const TABLE_RESULT_BIG5 = 'peserta_result_big5';
     protected const TABLE_RESULT_FACET = 'peserta_result_facet';
     protected const TABLE_RESULT_STYLE = 'peserta_result_style';
-    protected const TABLE_RESULT_ADDITIONAL = 'peserta_result_additional';
+    protected const TABLE_ADDITIONAL_REPORT = 'peserta_additional_report';
+
+    protected const LFS_VERY_LOW = "Very Low";
+    protected const LFS_LOW = "Low";
+    protected const LFS_AVERAGE = "Average";
+    protected const LFS_HIGH = "High";
+    protected const LFS_VERY_HIGH = "Very High";
     #endregion
 
     #region Attributes    
@@ -49,6 +55,14 @@ class Basemodel extends CI_Model{
         }
 
         return $selectedColumn;
+    }
+    
+    protected function _array_group_by($arr, $fldName) {
+        $groups = array();
+        foreach ($arr as $rec) {
+            $groups[$rec[$fldName]] = $rec;
+        }
+        return $groups;
     }
 }
 

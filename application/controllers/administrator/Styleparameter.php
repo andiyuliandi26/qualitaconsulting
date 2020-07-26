@@ -1,20 +1,35 @@
 <?php
 
-class Styleparameter extends CI_Controller{
+class Styleparameter extends MY_Controller{
     public function __construct()
     {
          parent::__construct();
-        $this->load->helper('url_helper');
     }
 
     public function index()
     {
-        $data['facet'] = $this->style_parametermodel->get_data();
+        $data['data'] = $this->style_parametermodel->get_data();
+      
+        $this->load_administrator_view("administrator/styleparameter/main", $data);
+    }
 
-        $this->load->view("administrator/header");
-        $this->load->view("administrator/nav");        
-        $this->load->view("administrator/styleparameter/main", $data);
-        $this->load->view("administrator/footer");
+    public function update($id){
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('Style', 'Style', 'required');
+
+        $data['data'] = $this->style_parametermodel->get_data_byid($id);
+
+        if ($this->form_validation->run() === FALSE)
+        {
+            $this->load_administrator_view('/administrator/styleparameter/update', $data);
+        }
+        else
+        {
+           if( $this->style_parametermodel->update_data($id)){
+                redirect(base_url("/administrator/styleparameter/"));
+           }
+        }
     }
 }
 

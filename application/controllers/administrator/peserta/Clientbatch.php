@@ -4,7 +4,7 @@ class Clientbatch extends MY_Controller{
     public function index(){
         $data['data'] = $this->clientbatchmodel->get_data();
 
-        $this->load_view('/administrator/peserta/clientbatch/main', $data);
+        $this->load_administrator_view('/administrator/peserta/clientbatch/main', $data);
     }
 
     public function create(){
@@ -29,7 +29,7 @@ class Clientbatch extends MY_Controller{
 
         if ($this->form_validation->run() === FALSE)
         {
-            $this->load_view('/administrator/peserta/clientbatch/create', $data);
+            $this->load_administrator_view('/administrator/peserta/clientbatch/create', $data);
         }
         else
         {
@@ -62,7 +62,7 @@ class Clientbatch extends MY_Controller{
 
         if ($this->form_validation->run() === FALSE)
         {
-            $this->load_view('/administrator/peserta/clientbatch/update', $data);
+            $this->load_administrator_view('/administrator/peserta/clientbatch/update', $data);
         }
         else
         {

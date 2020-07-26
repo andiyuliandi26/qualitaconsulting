@@ -26,6 +26,7 @@ class Facetmodel extends Basemodel{
 
     public function update_data($id){
         $data = array(
+            'Nama' => $this->input->post('Nama'),
             'RedaksiAwal' => $this->input->post('RedaksiAwal'),
             'RedaksiLow' => $this->input->post('RedaksiLow'),
             'RedaksiAverage' => $this->input->post('RedaksiAverage'),

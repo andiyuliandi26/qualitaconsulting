@@ -1,10 +1,18 @@
 <?php
 
 class Client extends MY_Controller{
+    
     public function index(){
-        $data['data'] = $this->clientmodel->get_data();
+        if (!$this->ion_auth->logged_in())
+		{
+			// redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}else{
 
-        $this->load_view('/administrator/peserta/client/main', $data);
+            $data['data'] = $this->clientmodel->get_data();
+
+            $this->load_administrator_view('/administrator/peserta/client/main', $data);
+        }
     }
 
     public function create(){
@@ -18,7 +26,7 @@ class Client extends MY_Controller{
 
         if ($this->form_validation->run() === FALSE)
         {
-            $this->load_view('/administrator/peserta/client/create', $data);
+            $this->load_administrator_view('/administrator/peserta/client/create', $data);
         }
         else
         {
@@ -38,7 +46,7 @@ class Client extends MY_Controller{
         
         if ($this->form_validation->run() === FALSE)
         {
-            $this->load_view('/administrator/peserta/client/update', $data);
+            $this->load_administrator_view('/administrator/peserta/client/update', $data);
         }
         else
         {

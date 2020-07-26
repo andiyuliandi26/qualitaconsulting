@@ -3,7 +3,7 @@
     <div class="card-header">
         <h4 class="card-title">Data Domain Big 5</h4>
     </div>
-    <div class="card-body">
+    <div class="card-body table-responsive-lg">
         <table width="100%" class="table table-bordered table-striped">
             <thead class="thead-dark text-center" style="v-align:middle">
                 <tr>

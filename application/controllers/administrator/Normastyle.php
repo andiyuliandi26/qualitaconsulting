@@ -9,6 +9,7 @@ class Normastyle extends MY_Controller{
     public function index()
     {
         $data['data'] = $this->normastylemodel->get_data();
+        $data['dataBig5'] = $this->big5model->get_data();
       
         $this->load_administrator_view("administrator/normastyle/main", $data);
     }
@@ -31,6 +32,8 @@ class Normastyle extends MY_Controller{
            }
         }
     }
+
+    
 }
 
 ?>

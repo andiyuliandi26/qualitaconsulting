@@ -4,7 +4,7 @@
         <h3 class="card-title">Data Client</h3>
         <a href="<?php echo base_url(); ?>/administrator/peserta/client/create" class="btn btn-outline-primary"> Tambah </a>
     </div>
-    <div class="card-body">
+    <div class="card-body table-responsive-lg">
         <table width="100%" class="table table-bordered table-striped">
             <thead class="thead-dark text-center">
                 <tr>

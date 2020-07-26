@@ -8,19 +8,19 @@
 
         <?php echo form_open(base_url()."administrator/normafacet/update/{$data->ID}"); ?>
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-4 col-lg-2">
                 <div class="form-group">
                     <?php echo form_label('Facet', 'Facet'); ?>
                     <?php echo form_input('Facet',  $data->FacetDesc, 'class="form-control" readonly'); ?>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4 col-lg-2">
                 <div class="form-group">
                     <?php echo form_label('Jenis Kelamin', 'JenisKelamin'); ?>
                     <?php echo form_input('JenisKelamin',  $data->JenisKelamin, 'class="form-control" readonly'); ?>
                 </div>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2 col-lg-1">
                 <div class="form-group">
                     <?php echo form_label('Lfs', 'Lfs'); ?>
                     <?php echo form_input('Lfs',  $data->Lfs, 'class="form-control" readonly'); ?>
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-4 col-lg-2">
                 <div class="form-group text-center">
                     <?php echo form_label('Score', 'Score'); ?>
                     <div class="input-group">                        

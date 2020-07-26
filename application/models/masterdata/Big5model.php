@@ -19,6 +19,11 @@ class Big5model extends Basemodel{
 
     public function update_data($id){
         $data = array(
+            'Nama' => $this->input->post('Nama'),
+            'Kode' => $this->input->post('Kode'),
+            'MatriksLow' => $this->input->post('MatriksLow'),
+            'MatriksAverage' => $this->input->post('MatriksAverage'),
+            'MatriksHigh' => $this->input->post('MatriksHigh'),
             'RedaksiLow' => $this->input->post('RedaksiLow'),
             'RedaksiAverage' => $this->input->post('RedaksiAverage'),
             'RedaksiHigh' => $this->input->post('RedaksiHigh'),
@@ -30,7 +35,6 @@ class Big5model extends Basemodel{
             return true;
         }else{
             show_error("Terjadi kesalahan pada simpan data");
-            var_dump("test");
             return false;
         }
     }
