@@ -22,8 +22,8 @@
             <tbody>
                 <?php  foreach($data as $items):
                         $linkTest = $this->config->item('default_test_url').$items->Token;
-                        $jamAwal = date_format(new DateTime($items->JamAwalTest), 'h:i');
-                        $jamAkhir = date_format(new DateTime($items->JamAkhirTest), 'h:i');
+                        $jamAwal = date_format(new DateTime($items->JamAwalTest,), 'H:i');
+                        $jamAkhir = date_format(new DateTime($items->JamAkhirTest), 'H:i');
                         $isUsed = ($items->IsUsed) ? "checked" : "";
                     ?>
                     <tr>
