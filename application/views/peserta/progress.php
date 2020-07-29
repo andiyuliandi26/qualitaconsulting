@@ -16,10 +16,10 @@
 <?php
     $progress = round((($currentPage - 1) / 40) * 100,0)
 ?>
-<div class="card m-3">
+<div class="card m-3 test-progress">
     <div class="card-header">
         <div class="row">
-            <div class="col-md-6 col-lg-8">
+            <div class="col">
                 <div class="list-group">
                     <div class="list-group-item border border-primary">
                         <div class="d-flex w-100 justify-content-between">
@@ -32,8 +32,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4 text-center">
-                <h1 id="runner" class="display-2 badges badge-secondary"></h1>
+            <div class="col-lg-auto text-center">
+                <h1 id="runner" class="badges badge-secondary" width="410px"></h1>
                 <input type="hidden" value="<?php echo $peserta->TestDuration; ?>" id="lastDurationTest">
             </div>
         </div>
@@ -48,7 +48,7 @@
         </div>
         <div class="row mt-2">
             <div class="col-md-12">
-                <div class="list-group">
+                <div class="list-group pernyataan">
                     <?php echo form_hidden('pesertaID', $peserta->ID); ?>
                     <?php 
                         $index = 0;
@@ -69,7 +69,7 @@
                                                 <?php echo $itemsAnswer->Redaksi; ?>
                                             </label>
                                     
-                                    <?php endforeach; ?>
+                                        <?php endforeach; ?>
                                     
                                     </div>  
                                 </div>
@@ -108,7 +108,21 @@
             autostart: true,
             countdown: false,
             startAt: <?php echo $peserta->TestDuration; ?> * 1000, // alternatively you could just write: 60*1000
-            milliseconds: true
+            milliseconds: false,
+            format: function(s,so) {
+                var ms = s % 1000;
+                s = (s - ms) / 1000;
+                var secs = s % 60;
+                s = (s - secs) / 60;
+                var mins = s % 60;
+                var hrs = (s - mins) / 60;
+
+                secs = secs < 10 ? "0" + secs : secs;
+                mins = mins < 10 ? "0" + mins : mins;
+                hrs = hrs == 0 ? "" : hrs < 10 ? "0" + hrs + ":" : hrs + ":";
+
+                return mins + ':' + secs;
+            }
         });
 
         var currentPage = <?php echo $currentPage; ?>;
