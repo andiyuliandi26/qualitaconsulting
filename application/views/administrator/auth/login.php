@@ -16,12 +16,13 @@ body{
 
   <div class="row" style="position:relative; top: 75px;">
     <div class="col-md-12">
-      <?php echo form_open("auth/login", array('class'=> 'form-signin'));?>
+      <?php echo form_open("auth/login", array('class'=> 'form-signin', 'method'=> 'post'));?>
         <div class="text-center mb-4">          
           <div class="alert alert-<?php echo $this->session->flashdata('message_type'); ?> text-center" role="alert">
               <span><?php echo $this->session->flashdata('message'); ?> </span>        
           </div>
-          <img class="mb-4" src="<?php echo base_url(); ?>assets/images/psychology.png" alt="" width="72" height="72">
+          <!-- <img class="mb-4" src="<?php echo base_url(); ?>assets/images/psychology.png" alt="" width="72" height="72"> -->
+          <img class="mb-4" src="<?php echo base_url(); ?>assets/images/Logo QAS.png" alt="" width="100" height="70">
           
           <h1 class="h3 mb-1 font-weight-normal">Qualita Consulting</h1>
           <p class="lead">Administrator Panel</p>

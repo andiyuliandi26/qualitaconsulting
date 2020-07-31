@@ -1,14 +1,6 @@
 
 
-    
-
-    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    <script>
-    $(document).ready(function() {
-        
-    });
-    </script>
-
+ </div>   
 
 </body>
 

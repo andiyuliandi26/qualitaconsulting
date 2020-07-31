@@ -11,6 +11,7 @@ class Apipeserta extends RestController
     public function __construct(){
         parent::__construct();
         $this->load->helper('jwt');
+        $this->load->library('email');
     }
 
     public function index_get()
@@ -81,6 +82,7 @@ class Apipeserta extends RestController
         $this->response($response);
     }
     #endregion
+
     #region Peserta Result
     public function update_result_post(){
         if($this->post('pesertaID') !== NULL){
@@ -138,6 +140,31 @@ class Apipeserta extends RestController
             'jwt' => $this->post('token'),
             'json_decode' => $jwt
         ]);
+    }
+
+    public function send_email_peserta_post(){
+        if($this->post('pesertaID') !== NULL){
+            if($this->pesertamodel->send_email_peserta($this->post('pesertaID'))){
+                $this->pesertamodel->update_data_email_peserta($this->post('pesertaID'));
+                $response['error'] = FALSE;
+                $response['message']='Pengiriman email berhasil.';
+                $response['emailMessage']= $this->email->print_debugger();
+            }else{
+
+                $response['error']=TRUE;
+                $response['message']='Pengiriman email gagal.';
+                $response['emailMessage']= $this->email->print_debugger();
+            }
+
+            $response['status']=self::HTTP_OK;
+            
+        }else{
+            $response['status'] = self::HTTP_BAD_REQUEST;
+            $response['error'] = TRUE;
+            $response['message'] = 'Akses API tidak diijinkan.';
+        }
+
+        $this->response($response);
     }
 
     #region Additional Report

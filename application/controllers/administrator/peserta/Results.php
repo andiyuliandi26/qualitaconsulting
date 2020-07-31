@@ -44,15 +44,26 @@ class Results extends MY_Controller
     {
         $getPeserta = $this->pesertamodel->get_data_byid($pesertaID);
         $getDataPeserta = $this->additionalreportmodel->get_data($pesertaID);
+        $resultBig5 = $this->resultsmodel->get_result_big5($pesertaID);
+        $resultFacet = $this->resultsmodel->get_result_facet($pesertaID);        
+        $facetSummaryResult = $this->resultsmodel->generate_facet_summary_result($resultFacet);
+        $resultStyle = $this->resultsmodel->get_result_style($pesertaID);        
+        $resultAdditoinalReport = $this->resultsmodel->get_result_additional_report($pesertaID);
 
-        $data['data'] = $getDataPeserta;
-        $data['dataPeserta'] = $getPeserta;
+        $data['dataAdditional'] = $getDataPeserta;
+        $data['peserta'] = $getPeserta;
+        $data['laporanData']['peserta'] = $getPeserta;
+        $data['laporanData']['big5'] = $resultBig5;
+        $data['laporanData']['facet'] = $resultFacet;
+        $data['laporanData']['result_facet_summary'] = $facetSummaryResult;
+        $data['laporanData']['style'] = $resultStyle;
+        $data['laporanData']['additional'] = $resultAdditoinalReport;
 
         $this->load_administrator_view('/administrator/peserta/results/additionalreport/main', $data);
     }
 
     public function generate_report($pesertaID){
-        $getPeserta = $this->resultsmodel->get_peserta($pesertaID);
+        $getPeserta = $this->pesertamodel->get_data_byid($pesertaID);
         $resultBig5 = $this->resultsmodel->get_result_big5($pesertaID);
         $resultFacet = $this->resultsmodel->get_result_facet($pesertaID);        
         $facetSummaryResult = $this->resultsmodel->generate_facet_summary_result($resultFacet);
@@ -66,7 +77,7 @@ class Results extends MY_Controller
         $data['style'] = $resultStyle;
         $data['additional'] = $resultAdditoinalReport;
         
-        $this->load_administrator_view("administrator/peserta/results/reportforadmin", $data);
+        $this->load_administrator_view("administrator/peserta/results/reportfinalforadmin", $data);
     }
 
     public function export_pdf($pesertaID){

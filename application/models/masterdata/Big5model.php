@@ -1,7 +1,7 @@
 <?php
 
 class Big5model extends Basemodel{
-    public $selectedColumn = self::TABLE_BIG5.".Nama as Big5Desc, ".self::TABLE_BIG5.".MatriksLow, ".self::TABLE_BIG5.".MatriksAverage, ".self::TABLE_BIG5.".MatriksHigh";
+    public $selectedColumn = self::TABLE_BIG5.".Kode as Big5Kode, ".self::TABLE_BIG5.".Nama as Big5Desc, ".self::TABLE_BIG5.".MatriksLow, ".self::TABLE_BIG5.".MatriksAverage, ".self::TABLE_BIG5.".MatriksHigh";
 
     public function get_data()
     {

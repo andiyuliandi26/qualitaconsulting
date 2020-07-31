@@ -13,9 +13,9 @@
                     <th>Nama Batch</th>
                     <th>Tanggal Test</th>
                     <th>Jam</th>
+                    <th>Durasi Test</th>                    
                     <th>Total Peserta</th>
-                    <th>Durasi Test</th>
-                    <th>Used</th>
+                    <th>Peserta Terdaftar</th>
                     <th>Link Test</th>
                 </tr>
             </thead>
@@ -36,16 +36,21 @@
                         <td style="width:10%" class="text-center"><?php echo "{$jamAwal} - {$jamAkhir}"; ?></td>
                         <td style="width:5%" class="text-center"><?php echo $items->TotalPeserta; ?></td>
                         <td style="width:5%" class="text-center"><?php echo $items->DurasiTest; ?></td>
-                        <td style="width:3%" class="text-center">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1" disabled="" <?php echo $isUsed; ?>>
-                                <label class="custom-control-label" for="customCheck1"></label>
-                            </div>
+                        <td style="width:10%" class="text-center">
+                            <?php echo $this->pesertamodel->get_jumlah_peserta_bybatch($items->ID); ?>
                         </td>
-                        <td style="width:25%" class="text-center">
-                            <a href="<?php echo $linkTest; ?>" class="btn btn-sm btn-outline-primary" target="_blank">Goto Test</a>
-                            <button class="btn btn-sm btn-outline-secondary copyClipboard" data-clipboard-text="<?php echo $linkTest; ?>">Copy Link</button>
-                            <button class="btn btn-sm btn-outline-info copyClipboard" data-clipboard-text="<?php echo $items->Token; ?>">Copy Token</button>
+                        <td style="width:15%" class="text-center">
+                            <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Action
+                            </button>
+                                <div class="dropdown-menu">
+                                    <a href="<?php echo $linkTest; ?>" class="dropdown-item btn btn-sm btn-outline-primary" target="_blank">Goto Test</a>
+                                    <div class="dropdown-divider"></div>
+                                    <button class="dropdown-item btn btn-sm btn-outline-secondary copyClipboard" data-clipboard-text="<?php echo $linkTest; ?>">Copy Link</button>
+                                    <div class="dropdown-divider"></div>
+                                    <button class="dropdown-item btn btn-sm btn-outline-info copyClipboard" data-clipboard-text="<?php echo $items->Token; ?>">Copy Token</button>
+                                </div>
+                            
                         </td>
                     </tr>
                 <?php endforeach?>

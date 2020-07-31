@@ -18,7 +18,6 @@ class Test extends MY_Controller {
             $data['tokenTest'] = $tokenPost;
             $data['tokenPeserta'] = $tokenPeserta;
             $data['peserta'] = $peserta;
-
             switch ($peserta->TestStatus) {
                 case 'Profile':
                     $data['buttonStartTitle'] = 'Mulai Tes!';
@@ -62,6 +61,7 @@ class Test extends MY_Controller {
                     return;
                 }
                 
+                $data['jabatanList'] = $this->pesertamodel->jabatanList;
                 $data['clientBatch'] = $getClientBatch;
                 $this->load_view('peserta/input-profile', $data);
 
@@ -81,7 +81,7 @@ class Test extends MY_Controller {
                 'Email' => $this->input->post('iEmail'),
                 'JenisKelamin' => $this->input->post('iJenisKelamin'),
                 'Usia' => $this->input->post('iUsia'),
-                'JabatanPekerjaan' => $this->input->post('iJabatan'),
+                'JabatanPekerjaan' => $this->input->post('iJabatansSelected'),
                 'BidangPekerjaan' => $this->input->post('iPekerjaan'),
                 'BatchID' => $this->input->post('iBatchID'),
             );
@@ -94,6 +94,11 @@ class Test extends MY_Controller {
                 $data['tokenPeserta'] = $insertDataPeserta->Token;
                 $data['peserta'] = $insertDataPeserta;
                 $data['buttonStartTitle'] = 'Mulai Tes!';
+
+                if($this->pesertamodel->send_email_peserta($insertDataPeserta->ID)){
+                    $this->pesertamodel->update_data_email_peserta($insertDataPeserta->ID);
+                }
+                
                 $this->load_view('peserta/profile', $data);
             }else{
                 redirect('test');
@@ -165,7 +170,7 @@ class Test extends MY_Controller {
     }
 
     public function result() {
-        $tokenGet = $this->input->get('tokenPeserta', true);
+        $tokenGet = $this->input->get('token', true);
         $tokenPost = $this->input->post('tokenPeserta', true);
 
         if ($tokenGet || $tokenPost) {
@@ -177,22 +182,39 @@ class Test extends MY_Controller {
 
             $tokenIsValid = $this->_cekTokenPeserta($currentToken);
             if ($tokenIsValid) {
-                $getPesertaID = $this->pesertamodel->get_data_bytoken($currentToken);  
-                $getPeserta = $this->resultsmodel->get_peserta($getPesertaID->ID);
-                $resultBig5 = $this->resultsmodel->get_result_big5($getPesertaID->ID);
-                $resultFacet = $this->resultsmodel->get_result_facet($getPesertaID->ID);        
+                $getPesertaData = $this->pesertamodel->get_data_bytoken($currentToken); 
+
+                //$getPeserta = $this->pesertamodel->get_peserta($getPesertaData->ID);
+                $resultBig5 = $this->resultsmodel->get_result_big5($getPesertaData->ID);
+                $resultFacet = $this->resultsmodel->get_result_facet($getPesertaData->ID);        
                 $facetSummaryResult = $this->resultsmodel->generate_facet_summary_result($resultFacet);
-                $resultStyle = $this->resultsmodel->get_result_style($getPesertaID->ID);
-                $resultAdditoinalReport = $this->resultsmodel->get_result_additional_report($getPesertaID->ID);
+                $resultStyle = $this->resultsmodel->get_result_style($getPesertaData->ID);
+                $resultAdditoinalReport = $this->resultsmodel->get_result_additional_report($getPesertaData->ID);
+                //var_dump($getPeserta);
                 //var_dump($resultStyle);
-                $data['peserta'] = $getPeserta;                
+                $data['peserta'] = $getPesertaData;                
                 $data['big5'] = $resultBig5;
                 $data['facet'] = $resultFacet;
                 $data['result_facet_summary'] = $facetSummaryResult;
                 $data['style'] = $resultStyle;
                 $data['additional'] = $resultAdditoinalReport;
+                $data['tokenTest'] = $getPesertaData->TokenTest;                
+                $data['tokenPeserta'] = $getPesertaData->Token;
                 
-                $this->load_view("peserta/hasiltest", $data);      
+                switch ($getPesertaData->TestStatus) {
+                    case 'Profile':
+                        //$data['peserta'] = $getPesertaData; 
+                        $data['buttonStartTitle'] = 'Mulai Tes!';
+                        $this->load_view('peserta/profile', $data);
+                        break;
+                    case 'Progress':
+                        $data['buttonStartTitle'] = 'Lanjutkan Tes!';
+                        $this->load_view('peserta/profile', $data);
+                        break;
+                    case 'Completed':
+                        $this->load_view("peserta/hasiltest", $data);  
+                        break;
+                }    
             } else {
                 redirect('test/result', 'refresh');
             }
@@ -214,15 +236,15 @@ class Test extends MY_Controller {
         }
 
         $tokenDateExpired = new DateTime($data->TestDate);
-        //$tokenDateExpired->add(new DateInterval('P6M'));
-        $tokenDateExpired->add(new DateInterval('P1D'));
+        $tokenDateExpired->add(new DateInterval('P6M'));
+        //$tokenDateExpired->add(new DateInterval('P1D'));
 
 
         //validasi status progress peserta
         if($data->TestStatus != 'Completed'){
-            $this->session->set_flashdata('message', 'Anda belum menyelesaikan tes, <a href="/test" class="btn btn-link text-decoration-none">klik disini</a> untuk melanjutkan kembali.');
-            $this->session->set_flashdata('message_type', 'warning');
-            return FALSE;
+            //$this->session->set_flashdata('message', 'Anda belum menyelesaikan tes, <a href="/test" class="btn btn-link text-decoration-none">klik disini</a> untuk melanjutkan kembali.');
+            //$this->session->set_flashdata('message_type', 'warning');
+            //return FALSE;
         }
 
         // cek validasi waktu test
@@ -231,13 +253,6 @@ class Test extends MY_Controller {
             $this->session->set_flashdata('message_type', 'info');
             return FALSE;
         }
-        // cek jumlah peserta
-        // $pesertaTerdaftar = $this->pesertamodel->get_jmlpeserta_by_batchid($data->ID);
-        // if ($pesertaTerdaftar >= $data->TotalPeserta) {
-        //     $this->session->set_flashdata('message', 'Maaf, jumlah peserta tes sudah memenuhi kuota.');
-        //     $this->session->set_flashdata('message_type', 'info');
-        //     return FALSE;
-        // }
         return TRUE;
     }
 

@@ -7,6 +7,9 @@ class Pesertamodel extends Basemodel{
     //private $currentDate = date('y-m-d');
     private $defaultTestStatus = 'Profile';
     private $defaultTestDuration = 0;
+    public $jabatanList = array(
+        'Pelajar','Mahasiswa','Trainiee/Magang','Staff','Supervisor','Manager','Lainnya'
+    );
 
     public function get_data()
     {
@@ -78,6 +81,14 @@ class Pesertamodel extends Basemodel{
         return $this->db->get()->row_object();
     }
 
+    public function get_jumlah_peserta_bybatch($clientBatchID){
+        $query = $this->db->select('*')
+            ->from(self::TABLE_PESERTA)
+            ->where('BatchID', $clientBatchID);
+        
+        return $query->get()->num_rows();
+    }
+
     public function get_peserta_by_batchid($batchID) {
         $this->db->select("*")
             ->from(self::TABLE_PESERTA)
@@ -141,6 +152,18 @@ class Pesertamodel extends Basemodel{
         }
     }
 
+    public function update_data_email_peserta($id){
+        $this->db->set('EmailSent', true); 
+        $this->db->set('LastModifiedDate', date('Y-m-d H:i:s'));
+        $this->db->where('ID', $id);
+        if($this->db->update(self::TABLE_PESERTA)){
+            return TRUE;
+        }else{
+            show_error("Terjadi kesalahan pada simpan data");
+            return FALSE;
+        }
+    }
+
     public function get_jmlpeserta_by_batchid($batchID) {
         $this->db->from(self::TABLE_PESERTA)
             ->where("BatchID", $batchID);
@@ -178,6 +201,48 @@ class Pesertamodel extends Basemodel{
             ->limit(1);
         
         return $this->db->get()->row_object();
+    }
+
+    public function send_email_peserta($pesertaID){        
+        $this->load->library('email');
+
+        $getPeserta = $this->get_data_byid($pesertaID);
+        $tokenDateExpired = new DateTime($getPeserta->TestDate);
+        $tokenDateExpired->add(new DateInterval('P6M'));
+
+        $message = '<html></head>';
+        $message .= '</head><body><div style="text-align:center;"><div><h3>Data Peserta tes Qualita Profiling</h3></div>';
+        $message .='<div><p class="card-text">Dibawah ini adalah data yang Anda masukan pada tes Qualita Profiling. Gunakan token untuk melanjutkan atau melihat hasil tes Anda.</p>';
+        $message .='<table class="table table-solid" style="width:40%; margin-left:40%;"><tbody>';
+        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Token</th><td style="width:3%;">:</td><td style="width:65%; text-align:left;">'.$getPeserta->Token.'</td></tr>';
+        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Token Expired</th><td style="width:3%;">:</td><td style="width:65%;  text-align:left;">'.$tokenDateExpired->format('Y-m-d').'</td></tr>';
+        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Tanggal Tes</th><td style="width:3%;">:</td><td style="width:65%;  text-align:left;">'.date_format(new DateTime($getPeserta->TestDate), 'd/m/Y').'</td></tr>';
+        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Perusahaan / Batch</th><td>:</td><td style="text-align:left;">'.$getPeserta->NamaClient.' / '.$getPeserta->NamaBatch.'</td></tr>';
+        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Nama</th><td>:</td><td style="text-align:left;">'.$getPeserta->NamaPeserta.'</td></tr>';
+        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Jenis Kelamin</th><td>:</td><td style="text-align:left;">'.$getPeserta->JenisKelamin.'</td></tr>';
+        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Usia</th><td>:</td><td style="text-align:left;">'.$getPeserta->Usia.' tahun</td></tr>';
+        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Bidang Pekerjaan</th><td>:</td><td style="text-align:left;">'.$getPeserta->BidangPekerjaan.'</td></tr>';
+        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Jabatan Pekerjaan</th><td>:</td><td style="text-align:left;">'.$getPeserta->JabatanPekerjaan.'</td></tr>';
+        $message .='</tbody></table></div>';		
+        $message .='<div><a href="'.base_url().'test/result?token='.$getPeserta->Token.'"
+                    style="display: inline-block; font-weight: 400; text-align: center; white-space: nowrap; vertical-align: middle;border: 1px solid transparent;
+                        padding: 0.375rem 0.75rem;font-size: 1rem;line-height: 1.5;border-radius: 0.25rem;
+                        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                        color: #fff; background-color: #007bff;border-color: #007bff; text-decoration:none; margin-top:10px;">
+                Lanjutkan atau lihat hasil
+                </a></div>';
+        $message .='</div></div></body></html>';
+        
+        $this->email->from('admin@qualitaconsulting.co.id', 'Admin Qualita Consulting');
+        $this->email->to($getPeserta->Email);
+        $this->email->subject('Data Peserta Tes Qualita Profiling');
+        $this->email->message($message);
+        
+        if($this->email->send(FALSE)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
     }
 }
 ?>

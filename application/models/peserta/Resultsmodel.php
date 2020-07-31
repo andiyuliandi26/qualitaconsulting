@@ -5,11 +5,9 @@ class Resultsmodel extends Basemodel{
     #region Get Result for Chart
     public function get_result_big5($pesertaID){
 
-        $this->db->select(self::TABLE_RESULT_BIG5.'.*,'.self::TABLE_PESERTA.'.NamaPeserta,'.self::TABLE_PESERTA.'.JenisKelamin,'.self::TABLE_PESERTA.'.TestDate,'.
-                        self::TABLE_BIG5.'.Nama as Big5Desc,'.self::TABLE_BIG5.'.Kode');
+        $this->db->select(self::TABLE_RESULT_BIG5.'.*,'.self::TABLE_PESERTA.'.NamaPeserta,'.self::TABLE_PESERTA.'.JenisKelamin,'.self::TABLE_PESERTA.'.TestDate');
                         $this->db->from(self::TABLE_RESULT_BIG5);
                         $this->db->join(self::TABLE_PESERTA, self::TABLE_PESERTA.'.ID = '.self::TABLE_RESULT_BIG5.'.PesertaID');
-                        $this->db->join(self::TABLE_BIG5, self::TABLE_BIG5.'.ID = '.self::TABLE_RESULT_BIG5.'.Big5ID');
                         $this->db->where(self::TABLE_RESULT_BIG5.'.PesertaID = '.$pesertaID);
                         $this->db->order_by(self::TABLE_RESULT_BIG5.'.Big5ID');
 
@@ -128,6 +126,7 @@ class Resultsmodel extends Basemodel{
                 'PesertaID' => $peserta->ID,
                 'JenisKelamin' => $peserta->JenisKelamin,
                 'Big5ID' => $md_pernyataan[$search]['Big5ID'],
+                'Big5Kode' => $md_pernyataan[$search]['Big5Kode'],
                 'Big5Desc' => $md_pernyataan[$search]['Big5Desc'],
                 'FacetID' => $md_pernyataan[$search]['FacetID'],
                 'FacetDesc' => $md_pernyataan[$search]['FacetDesc'],
@@ -163,6 +162,7 @@ class Resultsmodel extends Basemodel{
             array_push($return, array(
                 'PesertaID' => $scoreData[$index]['PesertaID'],
                 'Big5ID' => $items['Big5ID'],
+                'Big5Kode' => $items['Big5Kode'],
                 'Big5Desc' => $items['Big5Desc'],
                 'TotalScore' => $score[$items['Big5ID']],
                 'LfsResult' => $getLfs->Lfs,

@@ -105,7 +105,8 @@ $autoload['helper'] = array();
 |
 */
 $autoload['config'] = array(
-    'form_validation'
+    'form_validation',
+    'email'
 );
 
 /*

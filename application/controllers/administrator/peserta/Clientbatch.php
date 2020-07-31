@@ -8,11 +8,11 @@ class Clientbatch extends MY_Controller{
     }
 
     public function create(){
-        $this->load->helper('form');
-        $this->load->library('form_validation');
+        //$this->load->helper('form');
+        //$this->load->library('form_validation');
 
         $this->form_validation->set_rules('ClientID', 'Client', 'required');        
-        $this->form_validation->set_rules('NamaBatch', 'Nama Batch', 'required|callback_namabatch_check');
+        $this->form_validation->set_rules('NamaBatch', 'Nama Batch', 'required');
         $this->form_validation->set_rules('TanggalTest', 'Tanggal Test', 'required');
         $this->form_validation->set_rules('JamAwalTest', 'Jam Awal Test', 'required');
         $this->form_validation->set_rules('JamAkhirTest', 'Jam Akhir Test', 'required');
@@ -49,7 +49,7 @@ class Clientbatch extends MY_Controller{
         $this->form_validation->set_rules('TanggalTest', 'Tanggal Test', 'required');
         $this->form_validation->set_rules('JamAwalTest', 'Jam Awal Test', 'required');
         $this->form_validation->set_rules('JamAkhirTest', 'Jam Akhir Test', 'required');
-        $this->form_validation->set_rules('TotalPeserta', 'Total Peserta', 'required|greater_than[0]');
+        $this->form_validation->set_rules('TotalPeserta', 'Total Peserta', 'required');
         $this->form_validation->set_rules('DurasiTest', 'Durasi Test', 'required|greater_than[0]');
         $this->form_validation->set_rules('Token', 'Token', 'required|min_length[10]|callback_token_check', array(
                         'required' => '%s wajib diisi',

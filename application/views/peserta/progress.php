@@ -137,12 +137,12 @@
                 dataType: "json",
                 data: { pesertaID: pesertaID, jawaban: jawabanArray, currentTestDuration: getDurationTime.time, currentPage: currentPage},
                 success: function (data) {
-                    console.log(data.objectSend);
-                    console.log(data.objectResult);
-                    console.log(data.status);
-                    console.log(data.error);
-                    console.log(data.message);
-                    console.log(data.TestStatus);
+                    // console.log(data.objectSend);
+                    // console.log(data.objectResult);
+                    // console.log(data.status);
+                    // console.log(data.error);
+                    // console.log(data.message);
+                    // console.log(data.TestStatus);
 
                     if(!data.error){
                         //alert(data.TestStatus);

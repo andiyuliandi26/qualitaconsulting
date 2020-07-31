@@ -17,7 +17,7 @@
                     <div class="form-group">
                         <label for="iEmail">Email</label>
                         <input name="iEmail" type="email" class="form-control col-md-6 col-md-4" id="iEmail" aria-describedby="emailHelp" required autocomplete="off">
-                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                        <small id="emailHelp" class="form-text text-muted">Silahkan gunakan <strong>email sebenarnya dan masih aktif</strong>. Token peserta akan dikirimkan ke e-mail terdaftar.</small>
                     </div>
                     <div class="form-group">
                         <label for="iJenisKelamin">Jenis Kelamin</label>
@@ -37,8 +37,14 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="iJabatan">Jabatan Pekerjaan</label>
-                        <input name="iJabatan" type="text" class="form-control col-sm-12 col-md-8 col-lg-6" id="iJabatan" required autocomplete="off"/>
+                        <label for="iJabatans">Jabatan Pekerjaan</label>
+                        <select name="iJabatansSelected" class="form-control col-md-3 col-lg-2" id="iJabatansSelected" required onchange="jabatanChange()">
+                            <option value="">- Pilih -</option>
+                            <?php foreach($jabatanList as $jabatan): ?>                            
+                                <option value="<?php echo $jabatan; ?>"><?php echo $jabatan; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <input name="iJabatan" type="hidden" class="form-control col-sm-12 col-md-8 col-lg-6" id="iJabatan" required autocomplete="off"/>
                     </div>
                     <div class="form-group">
                         <label for="iPekerjaan">Bidang Pekerjaan</label>

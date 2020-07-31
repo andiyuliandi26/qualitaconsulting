@@ -5,22 +5,30 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-md-6">
-                <div class="list-group">
-                    <div class="list-group-item list-group-item-action active">
-                        <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1"><?php echo $dataPeserta->NamaPeserta; ?></h5>
-                        <small><?php echo date_format(new DateTime($dataPeserta->TestDate), 'd/m/yy'); ?></small>
+            <div class="col-md-12">
+                <div class="accordion" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Laporan Peserta
+                                </button>
+                            </h2>
                         </div>
-                        <p class="mb-1"><?php echo "{$dataPeserta->NamaClient} / {$dataPeserta->NamaBatch}"; ?></p>
-                        <small><?php echo "{$dataPeserta->JenisKelamin} / {$dataPeserta->Usia} tahun"; ?></small>
+
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <?php $this->load->view('administrator/peserta/results/reportforadmin', $laporanData);?>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="row mt-3">
             <div class="col-md-6">
-                <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#exampleModal" onclick="add_additional(<?php echo $dataPeserta->ID; ?>);">
+                <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#exampleModal" onclick="add_additional(<?php echo $peserta->ID; ?>);">
                     Tambah
                 </button>
             </div>
@@ -29,7 +37,7 @@
         <div class="row mt-3">
             <div class="col-md-8">
                 <div class="list-group">
-                    <?php foreach($data as $items):?>
+                    <?php foreach($dataAdditional as $items):?>
                         <div href="#" class="list-group-item list-group-item-action">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1"><?php echo $items->Item; ?></h5>

@@ -32,16 +32,22 @@
                                     Action
                                 </button>
                                 <div class="dropdown-menu">
-                                    <?php if($items->TestStatus == 'Completed'): ?>
-                                    <a href="<?php echo base_url()."administrator/peserta/results/check_result/{$items->ID}" ;?>" class="dropdown-item btn btn-outline-info" >Cek Hasil</a>
-                                    <div class="dropdown-divider"></div>
-                                    <button class="dropdown-item" OnClick="update_peserta_result(<?php echo $items->ID; ?>)">Update Hasil</button>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="<?php echo base_url()."administrator/peserta/assignment/{$items->ID}" ;?>" class="dropdown-item btn btn-outline-info" >Assignment Additional Report</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="<?php echo base_url()."administrator/peserta/results/additional_report/{$items->ID}" ;?>" class="dropdown-item btn btn-outline-info" >Tambah Additional Report</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="<?php echo base_url()."administrator/peserta/results/generate_report/{$items->ID}" ;?>" class="dropdown-item btn btn-outline-info" >Lihat Hasil</a>
+                                    <?php if($this->ion_auth->is_admin() && !$items->EmailSent): ?>
+                                        <button OnClick="send_email_peserta(<?php echo $items->ID; ?>)" class="dropdown-item" >Email Data Peserta</button>                                    
+                                    <?php endif; ?>
+                                    <?php if($items->TestStatus == 'Completed'): ?>                                    
+                                        <div class="dropdown-divider"></div>
+                                        <a href="<?php echo base_url()."administrator/peserta/results/check_result/{$items->ID}" ;?>" class="dropdown-item btn btn-outline-info" >Cek Hasil</a>
+                                        <div class="dropdown-divider"></div>
+                                        <button class="dropdown-item" OnClick="update_peserta_result(<?php echo $items->ID; ?>)">Update Hasil</button>
+                                    <?php if($this->ion_auth->is_admin()): ?>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="<?php echo base_url()."administrator/peserta/assignment/{$items->ID}" ;?>" class="dropdown-item btn btn-outline-info" >Assignment Additional Report</a>
+                                    <?php endif; ?>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="<?php echo base_url()."administrator/peserta/results/additional_report/{$items->ID}" ;?>" class="dropdown-item btn btn-outline-info" >Tambah Additional Report</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="<?php echo base_url()."administrator/peserta/results/generate_report/{$items->ID}" ;?>" class="dropdown-item btn btn-outline-info" >Lihat Hasil</a>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -52,7 +58,7 @@
                         <td style="width:10%"><?php echo $items->JenisKelamin; ?></td>
                         <td style="width:10%" class="text-center"><?php echo date_format(new DateTime($items->TestDate), 'd/m/yy'); ?></td>
                         <td style="width:10%" class="text-center"><?php echo $items->TestStatus; ?></td>
-                        <td style="width:10%" class="text-center"><?php echo $items->TestDuration; ?></td>
+                        <td style="width:10%" class="text-center"><?php echo round($items->TestDuration / 60, 0); ?></td>
                         <td style="width:10%" class="text-left"><?php echo $items->username; ?></td>
                         <td style="width:10%" class="text-center">
                             <button class="btn btn-sm btn-outline-info copyClipboard" data-clipboard-text="<?php echo $items->Token; ?>">Copy Token</button>
@@ -71,7 +77,7 @@
             dataType: "json",
             data: { pesertaID: pesertaID },
             success: function (data) {
-                alert(data.message);
+                warningShow(data.message);
                 // if(!data.error){
                 //     console.log(data);
                 //     alert(data.message);
@@ -79,6 +85,19 @@
                 //     console.log(data);
                     
                 // }
+            }
+        });
+    }
+
+    function send_email_peserta(pesertaID){
+        $.ajax({
+            url:'<?php echo base_url()."/api/apipeserta/send_email_peserta";?>',
+            type: 'POST',
+            dataType: "json",
+            data: { pesertaID: pesertaID },
+            success: function (data) {
+                warningShow(data.message);
+                //console.log(data.emailMessage);
             }
         });
     }

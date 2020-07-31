@@ -11,7 +11,7 @@
                     <th rowspan=2>Sequence</th>
                     <th rowspan=2>Redaksi</th>
                     <th colspan=5>Score</th>
-                    <th rowspan=2>Big 5</th>
+                    <th rowspan=2>Domain</th>
                     <th rowspan=2>Facet</th>
                 </tr>
                 <tr>

@@ -1,7 +1,9 @@
 <div id="container">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation" style="margin-bottom: 0">
-        <a class="navbar-brand" href="<?php echo base_url(); ?>">Qualita Consulting</a>  
+        <img src="<?php echo base_url(); ?>assets/images/Logo QAS.png" width="40" height="30" alt="" loading="lazy">
+        <a class="navbar-brand ml-2" href="<?php echo base_url(); ?>">Qualita Consulting</a>  
+        <?php  if($this->ion_auth->logged_in()): ?>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>  
@@ -13,13 +15,13 @@
                     Master Data
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/big5">Big5</a>
+                        <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/big5">Domain</a>
                         <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/facet">Facet</a>
-                        <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/styleparameter">Style Parameter</a>
+                        <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/styleparameter">Style Character</a>
                         <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/pernyataan">Pernyataan</a>
-                        <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/normabig5">Norma Big 5</a>
+                        <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/normabig5">Norma Domain</a>
                         <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/normafacet">Norma Facet</a>
-                        <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/normastyle">Norma Style</a>
+                        <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/normastyle">Norma Style Character</a>
                     </div>
                 </li>                
                 <?php endif; ?>
@@ -57,6 +59,7 @@
                 }
             ?>
         </div>
+            <?php endif; ?>
     </nav>
 </div>
 <!-- /#wrapper -->

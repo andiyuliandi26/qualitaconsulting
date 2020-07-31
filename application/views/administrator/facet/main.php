@@ -8,12 +8,12 @@
             <thead class="thead-dark text-center">
                 <tr>
                     <th rowspan=2>Action</th>
-                    <th rowspan=2>Big 5</th>
+                    <th rowspan=2>Domain</th>
                     <th rowspan=2>Nama</th>
                     <th colspan=4>Redaksi</th>
                 </tr>
                 <tr>
-                    <th>Redaksi Awal</th>
+                    <!-- <th>Redaksi Awal</th> -->
                     <th>Redaksi Low</th>
                     <th>Redaksi Average</th>
                     <th>Redaksi High</th>
@@ -27,7 +27,7 @@
                         </td>
                         <td style="width:10%;"><?php echo $items->Big5Desc; ?></td>
                         <td style="width:10%;"><?php echo $items->Nama; ?></td>
-                        <td style="width:15%" class="show-read-more text-wrap"><?php echo $items->RedaksiAwal; ?></td>
+                        <!-- <td style="width:15%" class="show-read-more text-wrap"><?php echo $items->RedaksiAwal; ?></td> -->
                         <td style="width:15%" class="show-read-more text-wrap"><?php echo $items->RedaksiLow; ?></td>
                         <td style="width:15%" class="show-read-more text-wrap"><?php echo $items->RedaksiAverage; ?></td>
                         <td style="width:15%" class="show-read-more text-wrap"><?php echo $items->RedaksiHigh; ?></td>
