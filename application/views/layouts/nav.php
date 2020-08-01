@@ -45,7 +45,7 @@
                     Administrator
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/appsettings">Application Settings</a>
+                        <!-- <a class="dropdown-item" href="<?php //echo base_url(); ?>administrator/appsettings">Application Settings</a> -->
                         <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/auth/users">Users</a>
                         <!-- <a class="dropdown-item" href="<?php //echo base_url(); ?>administrator/auth/groups">Groups</a> -->
                         <!-- <a class="dropdown-item" href="<?php //echo base_url(); ?>administrator/auth/usergroups">User Groups</a> -->

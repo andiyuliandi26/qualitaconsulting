@@ -45,11 +45,11 @@
                                 <?php echo $items->Token; ?>
                             </button>
                                 <div class="dropdown-menu">
-                                    <a href="<?php echo $linkTest; ?>" class="dropdown-item btn btn-sm btn-outline-primary" target="_blank">Goto Test</a>
+                                    <a href="<?php echo $linkTest; ?>" class="dropdown-item btn btn-outline-info" target="_blank">Goto Test</a>
                                     <div class="dropdown-divider"></div>
-                                    <button class="dropdown-item btn btn-sm btn-outline-secondary copyClipboard" data-clipboard-text="<?php echo $linkTest; ?>">Copy Link</button>
+                                    <button class="dropdown-item btn btn-outline-info copyClipboard" data-clipboard-text="<?php echo $linkTest; ?>">Copy Link</button>
                                     <div class="dropdown-divider"></div>
-                                    <button class="dropdown-item btn btn-sm btn-outline-info copyClipboard" data-clipboard-text="<?php echo $items->Token; ?>">Copy Token</button>
+                                    <button class="dropdown-item btn btn-outline-info copyClipboard" data-clipboard-text="<?php echo $items->Token; ?>">Copy Token</button>
                                 </div>
                             
                         </td>
