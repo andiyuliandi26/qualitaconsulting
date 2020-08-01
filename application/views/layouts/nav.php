@@ -17,11 +17,11 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/big5">Domain</a>
                         <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/facet">Facet</a>
-                        <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/styleparameter">Style Character</a>
+                        <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/styleparameter">Style</a>
                         <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/pernyataan">Pernyataan</a>
                         <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/normabig5">Norma Domain</a>
                         <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/normafacet">Norma Facet</a>
-                        <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/normastyle">Norma Style Character</a>
+                        <a class="dropdown-item" href="<?php echo base_url(); ?>administrator/normastyle">Norma Style</a>
                     </div>
                 </li>                
                 <?php endif; ?>

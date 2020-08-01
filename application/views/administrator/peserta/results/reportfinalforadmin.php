@@ -1,5 +1,5 @@
-<div class="d-print-flex card m-3">
-    <div class="card-body">
+<div class="d-print-none card m-3">
+    <div class="d-print-none card-body">
         <!-- <div class="row d-print-none">
             <div class="col-md-12 col-lg-12">
                 <button class="btn btn-outline-success" onclick="print()"> Export Pdf </button>
@@ -108,7 +108,7 @@
 
         <div class="d-print-flex row border mt-3 ml-0 mr-0 p-2">
             <div class="col-md-12 mt-3">
-                <h3>Style of Character</h3>
+                <h3>Style</h3>
                 <div class="list-group">
                     <?php foreach($style as $items): ?>
                     <div href="#" class="list-group-item list-group-item-action">
@@ -140,6 +140,12 @@
             </div>
         </div>
         <?php endif;?>
+
+        <div class="d-print-none row mt-2 ml-0 mr-0 pt-1 pb-1">
+            <div class="col-md-12 justify-content-center text-center">
+                <button class="btn btn-outline-primary btn-sm" onclick="printPreview();">Print PDF</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -163,6 +169,11 @@ function resizeCanvas()
     var canvas = $('#myChart');
     canvas.css("width", $('#chartContainer').width());
     canvas.css("height", $('#chartContainer').height());
+}
+
+function printPreview(){
+    window.resizeTo(1366,786);
+    window.print();
 }
 
 $(document).ready(function() {

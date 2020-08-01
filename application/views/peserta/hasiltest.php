@@ -108,7 +108,7 @@
 
         <div class="d-print-flex row border mt-3 ml-0 mr-0 p-2">
             <div class="col-md-12 mt-3">
-                <h3>Style of Character</h3>
+                <h3>Style</h3>
                 <div class="list-group">
                     <?php foreach($style as $items): ?>
                     <div href="#" class="list-group-item list-group-item-action">
