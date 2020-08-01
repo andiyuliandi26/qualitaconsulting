@@ -1,6 +1,6 @@
 <div class="card m-3">
     <div class="card-header">
-        <h4 class="card-title">Data Domain Big 5</h4>
+        <h4 class="card-title">Data Domain</h4>
         <?php $this->load->view('layouts/filterandpaging', $dataInfo); ?>
     </div>
     <div class="card-body table-responsive-lg">

@@ -17,7 +17,7 @@
                     <th>Durasi Test</th>                    
                     <th>Total Peserta</th>
                     <th>Peserta Terdaftar</th>
-                    <th>Link Test</th>
+                    <th>Token</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,7 +42,7 @@
                         </td>
                         <td style="width:15%" class="text-center">
                             <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Action
+                                <?php echo $items->Token; ?>
                             </button>
                                 <div class="dropdown-menu">
                                     <a href="<?php echo $linkTest; ?>" class="dropdown-item btn btn-sm btn-outline-primary" target="_blank">Goto Test</a>
