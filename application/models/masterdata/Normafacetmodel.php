@@ -12,6 +12,21 @@ class Normafacetmodel extends Basemodel{
         return $this->db->get()->result_object();
     }
 
+    public function get_data_byfilterpage($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder)
+    {
+        $facet = new Facetmodel;
+        $fieldList = (object)array(
+            self::TABLE_FACET.'.Nama' => 'Nama Facet',
+            'JenisKelamin' => 'Jenis Kelamin'
+        );
+
+        $this->db->select(self::TABLE_NORMA_FACET.'.*,'.$facet->selectedColumn)
+            ->from(self::TABLE_NORMA_FACET)
+            ->join(self::TABLE_FACET, self::TABLE_NORMA_FACET.'.FacetID = '.self::TABLE_FACET.'.ID');
+
+        return $this->return_data_filtered($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder, $fieldList, $fieldList);
+    }
+
     public function get_data_byid($id)
     {
         $facet = new Facetmodel;

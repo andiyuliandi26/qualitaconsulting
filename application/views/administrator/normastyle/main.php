@@ -1,7 +1,8 @@
 
 <div class="card m-3">
     <div class="card-header">
-        <h4 class="card-title">Data Norma Style</h4>
+        <h4 class="card-title">Data Norma Style</h4>        
+        <?php $this->load->view('layouts/filterandpaging', $dataInfo); ?>
     </div>
     <div class="card-body table-responsive-lg">
         <table width="100%" class="table table-bordered table-striped">
@@ -14,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php  foreach($data as $items):
+                <?php  foreach($dataInfo->dataItems as $items):
                         $big5LeftMatriks = $this->normastylemodel->get_big5_matriks($dataBig5, $items->Big5LeftID, $items->Big5LeftLfs);
                         $big5RightMatriks = $this->normastylemodel->get_big5_matriks($dataBig5, $items->Big5RightID, $items->Big5RightLfs);
                 ?>

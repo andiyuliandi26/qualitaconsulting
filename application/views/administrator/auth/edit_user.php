@@ -10,7 +10,7 @@
 
         <?php echo form_open(base_url().'administrator/auth/edit_user/'.$user->id); ?>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-3">
                 <div class="form-group">
                     <?php echo form_label('Nama', 'first_name'); ?>
                     <?php echo form_input($first_name, set_value('first_name'), 'class="form-control" id="first_name"'); ?>
@@ -29,18 +29,7 @@
                     <?php echo form_input($email, set_value('email'), 'class="form-control"'); ?>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <?php echo form_label('Password', 'password'); ?>
-                    <div class="input-group">                        
-                        <?php echo form_input(array('name' => 'password'), $generatedToken, 'class="form-control" id="password"'); ?>
-                        <div class="input-group-append">
-                            <button type="button" class="btn btn-outline-secondary" OnClick="generate_random_token('Token');">Generate Password</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">                  
+            <div class="col-md-12">                  
                   <?php foreach ($groups as $group):
                         $gID=$group['id'];
                         $checked = null;

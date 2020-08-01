@@ -187,10 +187,10 @@ class Auth extends MY_Controller
 
 			// render
 			$this->load->view("layouts/header");
-			$this->load->view("layouts/nav");        
-			$this->_render_page('administrator/auth' . DIRECTORY_SEPARATOR . 'users', $this->data);       
-			$this->load->view("layouts/footer");
+			$this->load->view("layouts/nav");    
 			$this->_render_page('administrator/auth' . DIRECTORY_SEPARATOR . 'change_password', $this->data);
+			           
+			$this->load->view("layouts/footer");
 		}
 		else
 		{
@@ -755,6 +755,66 @@ class Auth extends MY_Controller
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/nav");
 		$this->_render_page('administrator/auth/edit_user', $this->data);      
+		$this->load->view("layouts/footer");
+	}
+
+	public function reset_password_user($id)
+	{
+		if (!$this->ion_auth->logged_in() || (!$this->ion_auth->is_admin() && !($this->ion_auth->user()->row()->id == $id)))
+		{
+			redirect('administrator/auth', 'refresh');
+		}
+
+		$user = $this->ion_auth->user($id)->row();			
+
+		// validate form input
+		$this->form_validation->set_rules('password', $this->lang->line('edit_user_validation_fname_label'), 'required');
+
+		if (isset($_POST) && !empty($_POST))
+		{
+			// do we have a valid request?
+			// if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id'))
+			// {
+			// 	show_error($this->lang->line('error_csrf'));
+			// }
+
+			if ($this->form_validation->run() === TRUE)
+			{
+				// update the password if it was posted
+				if ($this->input->post('password'))
+				{
+					$data['password'] = $this->input->post('password');
+				}
+				
+				// check to see if we are updating the user
+				if ($this->ion_auth->update($user->id, $data))
+				{
+					// redirect them back to the admin page if admin, or to the base url if non admin
+					$this->session->set_flashdata('message', $this->ion_auth->messages());
+					$this->redirectUser();
+				}
+				else
+				{
+					// redirect them back to the admin page if admin, or to the base url if non admin
+					$this->session->set_flashdata('message', $this->ion_auth->errors());
+					$this->redirectUser();
+				}
+
+			}
+		}
+
+		// display the edit user form
+		$this->data['csrf'] = $this->_get_csrf_nonce();
+
+		// set the flash data error message if there is one
+		$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
+
+		// pass the user to the view
+		$this->data['user'] = $user;		
+
+		$this->load->view("layouts/header");
+		$this->load->view("layouts/nav");
+		$this->_render_page('administrator/auth/reset_password_user', $this->data);      
 		$this->load->view("layouts/footer");
 	}
 

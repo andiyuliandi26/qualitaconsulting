@@ -13,6 +13,21 @@ class Pernyataanmodel extends BaseModel{
         return $this->db->get()->result_object();
     }
 
+    public function get_data_byfilterpage($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder)
+    {
+        $fieldList = (object)array(
+            self::TABLE_BIG5.'.Nama' => 'Nama Domain',
+            self::TABLE_FACET.'.Nama' => 'Nama Facet'
+        );
+        
+        $this->db->select(self::TABLE_PERNYATAAN.'.*, '.self::TABLE_BIG5.'.Nama as Big5Desc, '.self::TABLE_FACET.'.Nama as FacetDesc')
+                ->from(self::TABLE_PERNYATAAN)
+                ->join(self::TABLE_BIG5, self::TABLE_PERNYATAAN.'.Big5ID = '.self::TABLE_BIG5.'.ID')
+                ->join(self::TABLE_FACET, self::TABLE_PERNYATAAN.'.FacetID = '.self::TABLE_FACET.'.ID');
+
+        return $this->return_data_filtered($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder, $fieldList, $fieldList);
+    }
+
     public function get_data_byid($id)
     {
         $this->db->select(self::TABLE_PERNYATAAN.'.*, '.self::TABLE_BIG5.'.Nama as Big5Desc, '.self::TABLE_BIG5.'.Nama as FacetDesc')

@@ -2,7 +2,8 @@
 <div class="card m-3">
     <div class="card-header">
         <h3 class="card-title">Data Client Batch</h3>
-        <a href="<?php echo base_url(); ?>/administrator/peserta/clientbatch/create" class="btn btn-outline-primary"> Tambah </a>
+        <a href="<?php echo base_url(); ?>/administrator/peserta/clientbatch/create" class="btn btn-outline-primary mb-2"> Tambah </a>
+        <?php $this->load->view('layouts/filterandpaging', $dataInfo); ?>
     </div>
     <div class="card-body table-responsive-lg">
         <table width="100%" class="table table-bordered table-striped">
@@ -20,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php  foreach($data as $items):
+                <?php  foreach($dataInfo->dataItems as $items):
                         $linkTest = $this->config->item('default_test_url').$items->Token;
                         $jamAwal = date_format(new DateTime($items->JamAwalTest,), 'H:i');
                         $jamAkhir = date_format(new DateTime($items->JamAkhirTest), 'H:i');

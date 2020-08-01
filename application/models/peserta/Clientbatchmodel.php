@@ -24,6 +24,28 @@ class Clientbatchmodel extends Basemodel{
         return $this->db->get()->result_object();
     }
 
+    public function get_data_byfilterpage($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder)
+    {
+        $fieldList = (object)array(
+            "NamaClient" => 'Kode Client',
+            "NamaBatch" => 'Nama Batch',
+            "TanggalTest" => 'Tanggal Tes'
+        );
+        
+        $fieldSortList = (object)array(
+            "NamaClient" => 'Kode Client',
+            "NamaBatch" => 'Nama Batch',
+            "TanggalTest" => 'Tanggal Tes',
+            "JamAwalTest" => 'Jam Awal Tes'
+        );
+
+        $this->db->select(self::TABLE_CLIENT_BATCH.'.*, '.self::TABLE_CLIENT.'.NamaClient')
+            ->from(self::TABLE_CLIENT_BATCH)
+            ->join(self::TABLE_CLIENT, self::TABLE_CLIENT.'.ID = '.self::TABLE_CLIENT_BATCH.'.ClientID');
+
+        return $this->return_data_filtered($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder, $fieldList, $fieldSortList);
+    }
+
     public function get_data_byid($id)
     {
         $this->db->select(self::TABLE_CLIENT_BATCH.'.*, '.self::TABLE_CLIENT.'.NamaClient')

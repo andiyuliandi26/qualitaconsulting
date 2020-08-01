@@ -2,6 +2,7 @@
 <div class="card m-3">
     <div class="card-header">
         <h4 class="card-title">Data Peserta</h4>
+        <?php $this->load->view('layouts/filterandpaging', $dataInfo); ?>
     </div>
     <div class="card-body table-responsive-lg">
         <table width="100%" class="table table-bordered table-striped">
@@ -20,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php  foreach($data as $items):
+                <?php  foreach($dataInfo->dataItems as $items):
                     ?>
                     <tr>
                         <td style="width:5%" class="text-center">

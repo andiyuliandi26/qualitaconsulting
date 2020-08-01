@@ -12,6 +12,24 @@ class Normabig5model extends Basemodel{
         return $this->db->get()->result_object();
     }
 
+    public function get_data_byfilterpage($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder)
+    {
+        $big5 = new Big5Model;
+        $returnValue = new Basemodel;
+        $fieldList = (object)array(
+            self::TABLE_BIG5.".Nama" => 'Nama Domain',
+            "JenisKelamin" => 'Jenis Kelamin'
+        );
+        
+        $currentPageforLimit = ($page - 1) * $pageSize;
+        
+        $this->db->select(self::TABLE_NORMA_BIG5.'.*,'.$big5->selectedColumn)
+            ->from(self::TABLE_NORMA_BIG5)
+            ->join(self::TABLE_BIG5, self::TABLE_NORMA_BIG5.'.Big5ID = '.self::TABLE_BIG5.'.ID');
+
+            return $this->return_data_filtered($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder, $fieldList, $fieldList);
+    }
+
     public function get_data_byid($id)
     {
         $big5 = new Big5Model;

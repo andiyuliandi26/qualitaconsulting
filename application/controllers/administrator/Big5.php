@@ -8,16 +8,21 @@ class Big5 extends MY_Controller{
 
     public function index()
     {
-        if (!$this->ion_auth->logged_in())
-		{
-			// redirect them to the login page
-			redirect('auth/login', 'refresh');
-		}else{
+        $filterColumn = $this->input->post('filterColumn');
+        $filterOperator = $this->input->post('filterOperator');
+        $filterValue = $this->input->post('filterValue');
+        $sortBy = $this->input->post('sortBy');
+        $sortOrder = $this->input->post('sortOrder');
+        $pageSelected = $this->input->post('pageSelected');
+        $pageSizeSelected = $this->input->post('pageSizeSelected');
 
-            $data['data'] = $this->big5model->get_data();
-      
-            $this->load_administrator_view("administrator/big5/main", $data);
+        if($filterColumn && $pageSelected && $pageSizeSelected){
+            $data['dataInfo'] = $this->big5model->get_data_byfilterpage($pageSelected, $pageSizeSelected, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder);
+        }else{
+            $data['dataInfo'] = $this->big5model->get_data_byfilterpage(1,10,'','','','', '');
         }
+      
+        $this->load_administrator_view("administrator/big5/main", $data);
     }
 
     public function update($id){

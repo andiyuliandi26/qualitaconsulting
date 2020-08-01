@@ -1,6 +1,19 @@
 <?php
 
 class Basemodel extends CI_Model{
+    public $totalSize;
+    public $totalPage;
+    public $currentPage;
+    public $currentPageSize;
+    public $dataItems;
+    public $columnFilterList;
+    public $filterColumn;
+    public $filterOperator;
+    public $filterValue;
+    public $sortBy;
+    public $sortOrder;
+    public $columnSortList;
+
     #region Constanta    
     protected const JWT_SECRET = "qualitaconsulting";
     protected $link_test;
@@ -46,6 +59,34 @@ class Basemodel extends CI_Model{
         return $query->result_object();
     }
 
+    protected function get_all_data_byfilterpage($table, $page, $pageSize, $filterColumn, $filterValue,$selectedColumn = '*')
+    {
+        $totalData = $this->db->count_all($table);
+        $fieldList = $this->db->list_fields($table);
+        $totalPage = round($totalData / $pageSize);
+
+        $returnValue = new Basemodel();
+        $returnValue->currentPage = $page;
+        $returnValue->totalSize = $totalData;
+        $returnValue->totalPage = $totalPage;
+        $returnValue->columnFilterList = $fieldList;
+        $returnValue->filterColumn = $filterColumn;
+        $returnValue->filterValue = $filterValue;
+
+        $this->db->select($selectedColumn);
+        $this->db->from($table);
+
+        if($filterColumn != ''){
+            $this->db->like($filterColumn, $filterValue);
+        }
+
+        $this->db->limit($pageSize, $page); 
+
+        $returnValue->dataItems = $this->db->get()->result_object();
+
+        return $returnValue;
+    }
+
     protected function generate_column_selected($table,array $column)
     {
         $selectedColumn = '';
@@ -63,6 +104,57 @@ class Basemodel extends CI_Model{
             $groups[$rec[$fldName]] = $rec;
         }
         return $groups;
+    }
+
+    protected function return_data_filtered($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder, $filterColumnList, $sortColumnList){        
+        $returnValue = new Basemodel;
+        $currentPageforLimit = ($page - 1) * $pageSize;
+
+        if($filterColumn != '' && $filterValue != '' && $filterOperator != ''){
+            switch($filterOperator){
+                case "Equal":
+                    $this->db->where($filterColumn, $filterValue);
+                    break; 
+                case "NotEqual":
+                    $this->db->where($filterColumn.' !=', $filterValue);
+                    break; 
+                case "Like":
+                    $this->db->like($filterColumn, $filterValue);
+                    break; 
+                case "NotLike":
+                    $this->db->not_like($filterColumn, $filterValue);
+                    break; 
+            }
+        }
+
+        if($sortBy != '' && $sortOrder != ''){
+            $this->db->order_by($sortBy,$sortOrder);
+        }else{
+            $this->db->order_by('ID','DESC');
+        }
+        //Get query result
+        $query = $this->db->get()->result_object();
+        
+        //var_dump($this->db->last_query());
+        $totalData = count($query);
+        $totalPage = ceil($totalData / $pageSize);
+
+        //$this->db->limit($pageSize, $currentPageforLimit); 
+
+        $returnValue->currentPage = ($totalData > 0) ? $page : 1;
+        $returnValue->currentPageSize = $pageSize;
+        $returnValue->totalSize = $totalData;
+        $returnValue->totalPage = ($totalData > 0) ? $totalPage : 1;
+        $returnValue->columnFilterList = $filterColumnList;
+        $returnValue->filterColumn = $filterColumn;
+        $returnValue->filterOperator = $filterOperator;        
+        $returnValue->filterValue = $filterValue;
+        $returnValue->sortBy = $sortBy;
+        $returnValue->sortOrder = $sortOrder;
+        $returnValue->columnSortList = $sortColumnList;
+        $returnValue->dataItems = array_slice($query,$currentPageforLimit, $pageSize);
+
+        return $returnValue;
     }
 }
 

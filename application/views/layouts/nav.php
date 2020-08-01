@@ -54,10 +54,18 @@
                 <?php endif; ?>
             </ul> 
             <?php 
-                if($this->ion_auth->logged_in()){
-                    echo '<a class="btn btn-sm btn-outline-light my-2 my-sm-0 mr-2" href="'.base_url().'/auth/logout">'.$this->ion_auth->user()->row()->first_name.' - Logout</a>';
-                }
-            ?>
+                if($this->ion_auth->logged_in()): ?>
+                <div class="btn-group dropleft">
+                    <button type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <?php echo $this->ion_auth->user()->row()->first_name; ?>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="<?php echo base_url().'/auth/change_password'; ?>">Ubah Password</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="<?php echo base_url().'/auth/logout'; ?>">Logout</a>
+                    </div>
+                </div>
+            <?php endif; ?>
         </div>
             <?php endif; ?>
     </nav>

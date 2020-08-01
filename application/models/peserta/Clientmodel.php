@@ -10,11 +10,25 @@ class Clientmodel extends Basemodel{
     
     public function get_data()
     {
-        $this->db->select(self::TABLE_CLIENT.'.*');
-        $this->db->from(self::TABLE_CLIENT);
+        $this->db->select(self::TABLE_CLIENT.'.*')
+            ->from(self::TABLE_CLIENT);
         
         $query = $this->db->get();
         return $query->result_object();
+    }
+
+    public function get_data_byfilterpage($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder)
+    {
+        $big5 = new Big5Model;
+        $fieldList = (object)array(
+            "KodeClient" => 'Kode Client',
+            "NamaClient" => 'Nama Client'
+        );
+        
+        $this->db->select(self::TABLE_CLIENT.'.*')
+            ->from(self::TABLE_CLIENT);
+
+        return $this->return_data_filtered($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder, $fieldList, $fieldList);
     }
 
     public function get_data_byid($id)

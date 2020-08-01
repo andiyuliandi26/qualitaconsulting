@@ -19,7 +19,17 @@
                 <?php  foreach($users as $user): ?>
                     <tr>
 						<td style="width:3%;" class="text-center">
-                            <a href="<?php echo base_url()."auth/edit_user/{$user->id}"; ?>" class="btn btn-sm btn-outline-primary">Edit</a>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Action
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a href="<?php echo base_url()."auth/edit_user/{$user->id}"; ?>" class="dropdown-item btn btn-sm btn-outline-primary">Edit</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="<?php echo base_url()."auth/reset_password_user/{$user->id}"; ?>" class="dropdown-item btn btn-sm btn-outline-primary">Reset Password</a>
+                                </div>
+                            </div>
+                            
                         </td>
 						<td style="width:10%"><?php echo htmlspecialchars($user->first_name,ENT_QUOTES,'UTF-8');?></td>
 						<td style="width:10%"><?php echo htmlspecialchars($user->username,ENT_QUOTES,'UTF-8');?></td>

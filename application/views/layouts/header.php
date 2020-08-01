@@ -57,6 +57,7 @@
                 console.error('Action:', e.action);
                 console.error('Trigger:', e.trigger);
             });
+            
             $('.standardDate').datepicker({
                 format: "yyyy-mm-dd",
                 language: "id",

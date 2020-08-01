@@ -2,7 +2,8 @@
 <div class="card m-3">
     <div class="card-header">
         <h3 class="card-title">Data Client</h3>
-        <a href="<?php echo base_url(); ?>/administrator/peserta/client/create" class="btn btn-outline-primary"> Tambah </a>
+        <a href="<?php echo base_url(); ?>/administrator/peserta/client/create" class="btn btn-outline-primary mb-2"> Tambah </a>
+        <?php $this->load->view('layouts/filterandpaging', $dataInfo); ?>
     </div>
     <div class="card-body table-responsive-lg">
         <table width="100%" class="table table-bordered table-striped">
@@ -16,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php  foreach($data as $items): ?>
+                <?php  foreach($dataInfo->dataItems as $items): ?>
                     <tr>
                         <td style="width:5%;" class="text-center">
                             <a href="<?php echo base_url()."administrator/peserta/client/update/{$items->ID}"; ?>" class="btn btn-sm btn-outline-primary" >Edit</a>

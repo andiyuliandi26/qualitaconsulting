@@ -8,6 +8,19 @@ class Big5model extends Basemodel{
         return $this->get_all_data(self::TABLE_BIG5);
     }
 
+    public function get_data_byfilterpage($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder)
+    {   
+        $fieldList = (object) array(
+            "Nama" => 'Nama Domain', 
+            "Kode" => 'Kode'
+        );
+
+        $this->db->select('*')
+            ->from(self::TABLE_BIG5);
+
+        return $this->return_data_filtered($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder, $fieldList, $fieldList);
+    }
+
     public function get_data_byid($id)
     {
         $this->db->select(self::TABLE_BIG5.'.*')

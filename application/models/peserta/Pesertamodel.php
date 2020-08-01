@@ -27,6 +27,28 @@ class Pesertamodel extends Basemodel{
         return $this->db->get()->result_object();
     }
 
+    public function get_data_byfilterpage($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder)
+    {
+        $client = new Clientmodel;
+        $clientbatch = new Clientbatchmodel;
+        $fieldList = (object)array(
+            "NamaPeserta" => 'Nama Peserta', 
+            "NamaBatch" => 'Nama Batch', 
+            "NamaClient" => 'Nama Client',
+            "JenisKelamin" => 'Jenis Kelamin',
+            "TestDate" => 'Tanggal Tes',
+            "TestStatus" => 'Status Tes'
+        );
+
+        $this->db->select(self::TABLE_PESERTA.'.*,'.$client->selectedColumn.','.$clientbatch->selectedColumn.', users.username')
+            ->from(self::TABLE_PESERTA)
+            ->join(self::TABLE_CLIENT_BATCH, self::TABLE_CLIENT_BATCH.'.ID = '.self::TABLE_PESERTA.'.BatchID')
+            ->join(self::TABLE_CLIENT, self::TABLE_CLIENT.'.ID = '.self::TABLE_CLIENT_BATCH.'.ClientID')
+            ->join('users', 'users.id = '.self::TABLE_PESERTA.'.AdminAssignment', 'LEFT OUTER');
+
+        return $this->return_data_filtered($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder, $fieldList, $fieldList);
+    }
+
     public function get_data_current_user($userid)
     {
         $client = new Clientmodel;

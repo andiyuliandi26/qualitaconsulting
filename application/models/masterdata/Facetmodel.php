@@ -13,6 +13,21 @@ class Facetmodel extends Basemodel{
         return $this->db->get()->result_object();
     }
 
+    public function get_data_byfilterpage($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder)
+    {
+        $big5 = new Big5Model;
+        $fieldList = (object)array(
+            self::TABLE_FACET.".Nama" => 'Nama Facet', 
+            self::TABLE_BIG5.".Nama" => 'Nama Domain'
+        );
+        
+        $this->db->select(self::TABLE_FACET.'.*,'.$big5->selectedColumn)
+                ->from(self::TABLE_FACET)
+                ->join(self::TABLE_BIG5, self::TABLE_FACET.".Big5ID = ".self::TABLE_BIG5.".ID");
+
+        return $this->return_data_filtered($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder, $fieldList, $fieldList);
+    }
+
     public function get_data_byid($id)
     {
         $big5 = new Big5Model;

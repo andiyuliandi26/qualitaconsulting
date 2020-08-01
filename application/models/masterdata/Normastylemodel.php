@@ -12,6 +12,26 @@ class Normastylemodel extends Basemodel{
         return $this->db->get()->result_object();
     }
 
+    public function get_data_byfilterpage($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder)
+    {
+        $style = new Style_parametermodel;
+        
+        $fieldList = (object)array(
+            self::TABLE_STYLE_PARAMETER.'.Style' => 'Nama Style',
+            'JenisKelamin' => 'Jenis Kelamin'
+        );
+        
+        $this->db->select(self::TABLE_NORMA_STYLE.'.*,'.$style->selectedColumn)
+            ->from(self::TABLE_NORMA_STYLE)
+            ->join(self::TABLE_STYLE_PARAMETER, self::TABLE_NORMA_STYLE.'.StyleID = '.self::TABLE_STYLE_PARAMETER.'.ID');
+
+        if($filterColumn != '' && $filterValue != ''){
+            $this->db->like($filterColumn, $filterValue);
+        }
+
+        return $this->return_data_filtered($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder, $fieldList, $fieldList);
+    }
+
     public function get_data_byid($id)
     {
         $style = new Style_parametermodel;

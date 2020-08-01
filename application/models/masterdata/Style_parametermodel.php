@@ -13,6 +13,23 @@ class Style_parametermodel extends Basemodel{
         return $this->db->get()->result_object();
     }
 
+    public function get_data_byfilterpage($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder)
+    {
+        $style = new Style_parametermodel;
+        $fieldList = (object)array(
+            'Style' => 'Nama Style',
+            'Big5LeftKode' => 'Kode Domain Kiri',
+            'Big5RightKode' => 'Kode Domain Kanan'
+        );
+        
+        $this->db->select(self::TABLE_STYLE_PARAMETER.'.*, big5left.Kode as Big5LeftKode, big5right.Kode as Big5RightKode')
+            ->from(self::TABLE_STYLE_PARAMETER)
+            ->join(self::TABLE_BIG5.' as big5left', self::TABLE_STYLE_PARAMETER.'.Big5LeftID = big5left.ID')
+            ->join(self::TABLE_BIG5.' as big5right', self::TABLE_STYLE_PARAMETER.'.Big5RightID = big5right.ID');
+
+        return $this->return_data_filtered($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder, $fieldList, $fieldList);
+    }
+
     public function get_data_byid($id)
     {
         $this->db->select(self::TABLE_STYLE_PARAMETER.'.*, big5left.Kode as Big5LeftKode, big5right.Kode as Big5RightKode')
