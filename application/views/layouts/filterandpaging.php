@@ -107,7 +107,7 @@ $(document).ready(function(){
             $('#filterValue').val('<?php echo $dataInfo->filterValue; ?>');
         }else{
             $('#filterValue').datepicker("destroy");
-            $('#filterValue').val("");
+            $('#filterValue').val('<?php echo $dataInfo->filterValue; ?>');
         }
 
     $('#filterColumn').change(function(){
