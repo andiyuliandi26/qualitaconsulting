@@ -58,7 +58,8 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array();
+$autoload['libraries'] = array('database','ion_auth','session');
+
 
 /*
 | -------------------------------------------------------------------
@@ -103,7 +104,10 @@ $autoload['helper'] = array();
 | config files.  Otherwise, leave it blank.
 |
 */
-$autoload['config'] = array();
+$autoload['config'] = array(
+    'form_validation',
+    'email'
+);
 
 /*
 | -------------------------------------------------------------------
@@ -132,4 +136,21 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array();
+$autoload['model'] = array(
+    'Ion_auth_model',
+    'basemodel',
+    'masterdata/big5model',
+    'masterdata/facetmodel',
+    'masterdata/style_parametermodel',
+    'masterdata/pernyataanmodel',
+    'masterdata/normabig5model',
+    'masterdata/normafacetmodel',
+    'masterdata/normastylemodel',
+    'peserta/pesertamodel',
+    'peserta/clientmodel',
+    'peserta/clientbatchmodel',
+    'peserta/resultsmodel',
+    'peserta/additionalreportmodel',
+
+);
+

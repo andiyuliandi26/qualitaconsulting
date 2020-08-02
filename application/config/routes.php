@@ -52,3 +52,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['results/(:num)'] = 'results/index/$1';
+$route['pretest/(:num)'] = 'pretest/index/$1';
+$route['administrator'] = 'administrator/peserta/listpeserta';
+$route['administrator/peserta'] = 'administrator/peserta/listpeserta';
+$route['administrator/peserta/assignment/(:num)']['GET'] = 'administrator/peserta/listpeserta/assignment_additional_report/$1';
+$route['auth/(.+)'] = 'administrator/auth/$1';
+$route['login'] = 'administrator/auth/login';
+
