@@ -6,7 +6,7 @@
             </div>           
             <form method="post">
                 <div class="form-group">
-                    <label for="iToken" class="h2">Masukan Token Tes</label>
+                    <label for="iToken" class="h2">Masukan Token Profiling</label>
                     <input id="iToken" class="form-control form-control-lg text-center" name="token" type="text" required />
                 </div>
                 <!-- <div class="form-group">
@@ -17,7 +17,7 @@
                 </div>
                 <div class="form-group">
                 <!-- <h4 class="mt-2 mb-2">Sudah pernah tes? <button type="button" class="btn btn-link text-decoration-none" style="margin: 20px auto;">Klik disini</button></h4> -->
-                    <a href="/test/result" class="btn btn-link text-decoration-none">Klik disini untuk melanjutkan tes</a>
+                    <a href="/test/result" class="btn btn-link text-decoration-none text-danger">Klik disini untuk melanjutkan profiling</a>
                 </div>
             </form>
         </div>

@@ -127,6 +127,7 @@ class Pesertamodel extends Basemodel{
         $this->db->set('TokenGenerateDate', date('Y-m-d H:i:s')); 
         $this->db->set('NamaPeserta', $object->NamaPeserta); 
         $this->db->set('Email', $object->Email); 
+        $this->db->set('Handphone', $object->Handphone); 
         $this->db->set('JenisKelamin', $object->JenisKelamin); 
         $this->db->set('Usia', $object->Usia); 
         $this->db->set('JabatanPekerjaan', $object->JabatanPekerjaan); 
@@ -231,34 +232,13 @@ class Pesertamodel extends Basemodel{
         $getPeserta = $this->get_data_byid($pesertaID);
         $tokenDateExpired = new DateTime($getPeserta->TestDate);
         $tokenDateExpired->add(new DateInterval('P6M'));
-
-        $message = '<html></head>';
-        $message .= '</head><body><div style="text-align:center;"><div><h3>Data Peserta tes Qualita Profiling</h3></div>';
-        $message .='<div><p class="card-text">Dibawah ini adalah data yang Anda masukan pada tes Qualita Profiling. Gunakan token untuk melanjutkan atau melihat hasil tes Anda.</p>';
-        $message .='<table class="table table-solid" style="width:40%; margin-left:40%;"><tbody>';
-        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Token</th><td style="width:3%;">:</td><td style="width:65%; text-align:left;">'.$getPeserta->Token.'</td></tr>';
-        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Token Expired</th><td style="width:3%;">:</td><td style="width:65%;  text-align:left;">'.$tokenDateExpired->format('Y-m-d').'</td></tr>';
-        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Tanggal Tes</th><td style="width:3%;">:</td><td style="width:65%;  text-align:left;">'.date_format(new DateTime($getPeserta->TestDate), 'd/m/Y').'</td></tr>';
-        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Perusahaan / Batch</th><td>:</td><td style="text-align:left;">'.$getPeserta->NamaClient.' / '.$getPeserta->NamaBatch.'</td></tr>';
-        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Nama</th><td>:</td><td style="text-align:left;">'.$getPeserta->NamaPeserta.'</td></tr>';
-        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Jenis Kelamin</th><td>:</td><td style="text-align:left;">'.$getPeserta->JenisKelamin.'</td></tr>';
-        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Usia</th><td>:</td><td style="text-align:left;">'.$getPeserta->Usia.' tahun</td></tr>';
-        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Bidang Pekerjaan</th><td>:</td><td style="text-align:left;">'.$getPeserta->BidangPekerjaan.'</td></tr>';
-        $message .='<tr><th scope="row" style="width:35%; text-align:left;">Jabatan Pekerjaan</th><td>:</td><td style="text-align:left;">'.$getPeserta->JabatanPekerjaan.'</td></tr>';
-        $message .='</tbody></table></div>';		
-        $message .='<div><a href="'.base_url().'test/result?token='.$getPeserta->Token.'"
-                    style="display: inline-block; font-weight: 400; text-align: center; white-space: nowrap; vertical-align: middle;border: 1px solid transparent;
-                        padding: 0.375rem 0.75rem;font-size: 1rem;line-height: 1.5;border-radius: 0.25rem;
-                        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-                        color: #fff; background-color: #007bff;border-color: #007bff; text-decoration:none; margin-top:10px;">
-                Lanjutkan atau lihat hasil
-                </a></div>';
-        $message .='</div></div></body></html>';
+        $data['getPeserta'] = $getPeserta;
+        $html = $this->load->view("peserta/email-profile", $data, TRUE);        
         
         $this->email->from('admin@qualitaconsulting.co.id', 'Admin Qualita Consulting');
         $this->email->to($getPeserta->Email);
-        $this->email->subject('Data Peserta Tes Qualita Profiling');
-        $this->email->message($message);
+        $this->email->subject('Data Peserta Qualita Profiling');
+        $this->email->message($html);
         
         if($this->email->send(FALSE)){
             return TRUE;

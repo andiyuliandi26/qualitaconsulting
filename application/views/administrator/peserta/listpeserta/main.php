@@ -12,10 +12,11 @@
                     <th>Client/ Batch</th>
                     <th>Nama Peserta</th>                    
                     <th>Email</th>
+                    <th>Whatsapp</th>
                     <th>Jenis Kelamin</th>
-                    <th>Tanggal Test</th>
-                    <th>Test Status</th>
-                    <th>Test Duration</th>
+                    <th>Tanggal Tes</th>
+                    <th>Status</th>
+                    <th>Durasi</th>
                     <th>Admin Assignment</th>
                     <th>Token</th>
                 </tr>
@@ -33,7 +34,7 @@
                                     Action
                                 </button>
                                 <div class="dropdown-menu">
-                                    <?php if($this->ion_auth->is_admin() && !$items->EmailSent): ?>
+                                    <?php if($this->ion_auth->is_admin()): ?>
                                         <button OnClick="send_email_peserta(<?php echo $items->ID; ?>)" class="dropdown-item" >Email Data Peserta</button>                                    
                                     <?php endif; ?>
                                     <?php if($items->TestStatus == 'Completed'): ?>                                    
@@ -56,12 +57,13 @@
                         <td style="width:15%"><?php echo "{$items->NamaClient} / {$items->NamaBatch}"; ?></td>
                         <td style="width:15%"><?php echo $items->NamaPeserta; ?></td>
                         <td style="width:5%"><?php echo $items->Email; ?></td>
+                        <td style="width:5%"><?php echo $items->Handphone; ?></td>
                         <td style="width:10%"><?php echo $items->JenisKelamin; ?></td>
                         <td style="width:10%" class="text-center"><?php echo date_format(new DateTime($items->TestDate), 'd/m/yy'); ?></td>
                         <td style="width:10%" class="text-center"><?php echo $items->TestStatus; ?></td>
                         <td style="width:10%" class="text-center"><?php echo round($items->TestDuration / 60, 0); ?></td>
                         <td style="width:10%" class="text-left"><?php echo $items->username; ?></td>
-                        <td style="width:10%" class="text-center">
+                        <td style="width:5%" class="text-center">
                             <button class="btn btn-sm btn-outline-info copyClipboard" data-clipboard-text="<?php echo $items->Token; ?>">Copy Token</button>
                         </td>
                     </tr>
@@ -99,6 +101,12 @@
             success: function (data) {
                 warningShow(data.message);
                 //console.log(data.emailMessage);
+            },
+            beforeSend: function(){
+                warningShow('Proses mengirim email....', true);
+            },
+            error:function(){
+                warningShow("Pengiriman email terjadi masalah.");
             }
         });
     }

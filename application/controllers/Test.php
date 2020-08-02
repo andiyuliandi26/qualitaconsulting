@@ -84,6 +84,7 @@ class Test extends MY_Controller {
                 'JabatanPekerjaan' => $this->input->post('iJabatansSelected'),
                 'BidangPekerjaan' => $this->input->post('iPekerjaan'),
                 'BatchID' => $this->input->post('iBatchID'),
+                'Handphone' => $this->input->post('iHandphone'),
             );
 
             //var_dump($pesertaNew);
@@ -222,7 +223,7 @@ class Test extends MY_Controller {
             $this->load_view('peserta/input-hasiltest');
         }
     }
-
+    
     #region Validation
     private function _cekTokenPeserta($token) {
         // cek token

@@ -98,9 +98,16 @@
             $('#' + obj).val(randomString(10));
         }
 
-        function warningShow(message){
+        function warningShow(message, hideButton = false){
             $('#warningMessage').text(message);
             $('#warningModal').modal('show');
+            if(hideButton){
+              $('#btnModalClose').hide();
+              $('#spinnerModal').show();
+            }else{
+              $('#btnModalClose').show();
+              $('#spinnerModal').hide();
+            }
         }
     </script>
     <style>
@@ -130,16 +137,16 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h5 class="modal-title" id="staticBackdropLabel">Warning</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Message</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body  text-center">
-            <h4 id="warningMessage">Error</h4>
+            <div><span class="spinner-border spinner-border text-primary" role="status" aria-hidden="true" id="spinnerModal"></span><h3 id="warningMessage"> Error </h3></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Mengerti</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnModalClose">Tutup</button>
       </div>
     </div>
   </div>
