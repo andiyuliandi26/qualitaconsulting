@@ -155,7 +155,7 @@ class Test extends MY_Controller {
             $resultStyle = $this->resultsmodel->get_result_style($getPesertaID->ID);
             $resultAdditoinalReport = $this->resultsmodel->get_result_additional_report($getPesertaID->ID);
             //var_dump($resultStyle);
-            $data['peserta'] = $getPeserta;                
+            $data['peserta'] = $getPesertaID;                
             $data['big5'] = $resultBig5;
             $data['facet'] = $resultFacet;
             $data['result_facet_summary'] = $facetSummaryResult;
