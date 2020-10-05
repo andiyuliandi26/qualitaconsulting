@@ -44,7 +44,8 @@ class Normabig5model extends Basemodel{
     public function update_data($id){
         $data = array(
             'BatasBawah' => $this->input->post('BatasBawah'),
-            'BatasAtas' => $this->input->post('BatasAtas')
+            'BatasAtas' => $this->input->post('BatasAtas'),
+            'Definisi' => $this->input->post('Definisi')
         );
         
         $this->db->where('ID', $id);

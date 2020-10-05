@@ -140,7 +140,7 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = FALSE;
+$config['composer_autoload'] = 'vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -252,7 +252,7 @@ $config['log_path'] = '';
 | Note: Leaving it blank will default to 'php'.
 |
 */
-$config['log_file_extension'] = '';
+$config['log_file_extension'] = 'log';
 
 /*
 |--------------------------------------------------------------------------
@@ -406,6 +406,8 @@ $config['sess_regenerate_destroy'] = FALSE;
 */
 $config['cookie_prefix']	= 'qualita';
 $config['cookie_domain']	= 'dev.qualitaconsulting.co.id';
+//$config['cookie_domain']	= 'devlocal.qualitaconsulting.co.id';
+//$config['cookie_domain']	= 'profiling.qualitaconsulting.co.id';
 $config['cookie_path']		= '/';
 $config['cookie_secure']	= TRUE;
 $config['cookie_httponly'] 	= FALSE;
@@ -527,3 +529,6 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 
 $config['default_test_url'] = $config['base_url']."/test?token=";
+
+$config['adminEmail'] = "admin@qualitaconsulting.co.id";
+$config['nameEmail'] = "Qualita Profiling";

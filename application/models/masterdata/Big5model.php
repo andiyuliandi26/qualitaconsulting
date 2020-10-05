@@ -40,6 +40,9 @@ class Big5model extends Basemodel{
             'RedaksiLow' => $this->input->post('RedaksiLow'),
             'RedaksiAverage' => $this->input->post('RedaksiAverage'),
             'RedaksiHigh' => $this->input->post('RedaksiHigh'),
+            'DefinisiLow' => $this->input->post('DefinisiLow'),
+            'DefinisiAverage' => $this->input->post('DefinisiAverage'),
+            'DefinisiHigh' => $this->input->post('DefinisiHigh'),
         );
         
         $this->db->where('ID', $id);

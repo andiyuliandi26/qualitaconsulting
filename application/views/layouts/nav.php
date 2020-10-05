@@ -60,9 +60,9 @@
                         <?php echo $this->ion_auth->user()->row()->first_name; ?>
                     </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="<?php echo base_url().'/auth/change_password'; ?>">Ubah Password</a>
+                        <a class="dropdown-item" href="<?php echo base_url().'auth/change_password'; ?>">Ubah Password</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="<?php echo base_url().'/auth/logout'; ?>">Logout</a>
+                        <a class="dropdown-item" href="<?php echo base_url().'auth/logout'; ?>">Logout</a>
                     </div>
                 </div>
             <?php endif; ?>

@@ -38,10 +38,22 @@ class Normafacetmodel extends Basemodel{
         return $this->db->get()->row_object();
     }
 
+    public function get_data_bygender($gender)
+    {
+        $facet = new Facetmodel;
+        $this->db->select(self::TABLE_NORMA_FACET.'.*,'.$facet->selectedColumn)
+            ->from(self::TABLE_NORMA_FACET)
+            ->join(self::TABLE_FACET, self::TABLE_NORMA_FACET.'.FacetID = '.self::TABLE_FACET.'.ID')
+            ->where(self::TABLE_NORMA_FACET.".JenisKelamin = '{$gender}'");
+
+        return $this->db->get()->result_object();
+    }
+
     public function update_data($id){
         $data = array(
             'BatasBawah' => $this->input->post('BatasBawah'),
-            'BatasAtas' => $this->input->post('BatasAtas')
+            'BatasAtas' => $this->ixnput->post('BatasAtas'),
+            'Definisi' => $this->ixnput->post('Definisi')
         );
         
         $this->db->where('ID', $id);
