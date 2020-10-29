@@ -2,6 +2,10 @@
 <div class="card m-3">
     <div class="card-header">
         <h4 class="card-title">Result</h4>
+        
+        <button type="button" class="btn btn-sm btn-outline-danger" onclick="window.history.back()">
+                    Kembali
+                </button>
     </div>
     <div class="card-body">
         <div class="row" style="max-height:200px; overflow:scroll;">

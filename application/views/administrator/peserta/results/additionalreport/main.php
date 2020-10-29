@@ -31,6 +31,9 @@
                 <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#exampleModal" onclick="add_additional(<?php echo $peserta->ID; ?>);">
                     Tambah
                 </button>
+                <button type="button" class="btn btn-sm btn-outline-danger" onclick="window.history.back()">
+                    Kembali
+                </button>
             </div>
         </div>
 
