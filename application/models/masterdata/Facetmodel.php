@@ -1,6 +1,6 @@
 <?php
 
-class Facetmodel extends Basemodel{    
+class Facetmodel extends Basemodel{
 
     public $selectedColumn = self::TABLE_FACET.".Nama as FacetDesc, ".self::TABLE_FACET.".RedaksiLow, ".self::TABLE_FACET.".RedaksiAverage, ".self::TABLE_FACET.".RedaksiHigh";
     public function get_data()
@@ -17,10 +17,10 @@ class Facetmodel extends Basemodel{
     {
         $big5 = new Big5Model;
         $fieldList = (object)array(
-            self::TABLE_FACET.".Nama" => 'Nama Facet', 
+            self::TABLE_FACET.".Nama" => 'Nama Facet',
             self::TABLE_BIG5.".Nama" => 'Nama Domain'
         );
-        
+
         $this->db->select(self::TABLE_FACET.'.*,'.$big5->selectedColumn)
                 ->from(self::TABLE_FACET)
                 ->join(self::TABLE_BIG5, self::TABLE_FACET.".Big5ID = ".self::TABLE_BIG5.".ID");
@@ -46,8 +46,11 @@ class Facetmodel extends Basemodel{
             'RedaksiLow' => $this->input->post('RedaksiLow'),
             'RedaksiAverage' => $this->input->post('RedaksiAverage'),
             'RedaksiHigh' => $this->input->post('RedaksiHigh'),
+            'DefinisiLow' => $this->input->post('DefinisiLow'),
+            'DefinisiAverage' => $this->input->post('DefinisiAverage'),
+            'DefinisiHigh' => $this->input->post('DefinisiHigh'),
         );
-        
+
         $this->db->where('ID', $id);
 
         if($this->db->update(self::TABLE_FACET, $data)){

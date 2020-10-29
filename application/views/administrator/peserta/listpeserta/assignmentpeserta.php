@@ -27,6 +27,9 @@
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-outline-success" >Simpan</button>
+                        <button type="button" class="btn btn-outline-danger" onclick="window.history.back()">
+                            Kembali
+                        </button>
                     </div>
                 </form>
             </div>

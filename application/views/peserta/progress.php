@@ -137,10 +137,10 @@
         var pesertaID = $("input[name='pesertaID']").val();
         var getDurationTime = $('#runner').runner('info');
         var currentPage = <?php echo $currentPage; ?>;
-        console.log('Jawaban 0 : ' + jawaban0);
-        console.log('Jawaban 1 : ' + jawaban1);
-        console.log('Jawaban 2 : ' + jawaban2);
-        console.log('currentPage : ' + currentPage);
+        //console.log('Jawaban 0 : ' + jawaban0);
+        //console.log('Jawaban 1 : ' + jawaban1);
+        //console.log('Jawaban 2 : ' + jawaban2);
+        //console.log('currentPage : ' + currentPage);
         if(jawaban0 == undefined || jawaban1 == undefined || jawaban2 == undefined ){
             warningShow("Lengkapi jawaban Anda..!!");
         }else{
@@ -169,7 +169,7 @@
                             $('body').append(form);
                             form.submit();
                         }else{
-                            var url2 = '<?php echo base_url().'test/generate_report'; ?>';
+                            var url2 = '<?php echo base_url().'test/procced_to_report'; ?>';
                             var form2 = $('<form action="' + url2 + '" method="post">' +
                                                     '<input type="hidden" name="tokenTest" value="<?php echo $peserta->TokenTest; ?>" />' +
                                                     '<input type="hidden" name="tokenPeserta" value="<?php echo $peserta->Token; ?>" />' +

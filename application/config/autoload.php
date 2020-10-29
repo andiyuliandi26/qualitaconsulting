@@ -151,6 +151,7 @@ $autoload['model'] = array(
     'peserta/clientbatchmodel',
     'peserta/resultsmodel',
     'peserta/additionalreportmodel',
+    'loggingmodel' => 'logging',
 
 );
 

@@ -56,7 +56,24 @@
                     <?php echo form_textarea(array('name' => 'RedaksiHigh', 'rows'=> '4', 'cols' => '20'), $data->RedaksiHigh, 'class="form-control"'); ?>
                 </div>
             </div>
-            
+			<div class="col-md-4">
+				<div class="form-group">
+					<?php echo form_label('Definisi Low', 'DefinisiLow'); ?>
+					<?php echo form_textarea(array('name' => 'DefinisiLow', 'rows'=> '1', 'cols' => '20'), $data->DefinisiLow, 'class="form-control"'); ?>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<?php echo form_label('Definisi Average', 'DefinisiAverage'); ?>
+					<?php echo form_textarea(array('name' => 'DefinisiAverage', 'rows'=> '1', 'cols' => '20'), $data->DefinisiAverage, 'class="form-control"'); ?>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<?php echo form_label('Definisi High', 'DefinisiHigh'); ?>
+					<?php echo form_textarea(array('name' => 'DefinisiHigh', 'rows'=> '1', 'cols' => '20'), $data->DefinisiHigh, 'class="form-control"'); ?>
+				</div>
+			</div>
         </div>
 
         <button type="submit" class="btn btn-outline-success">Simpan</button>

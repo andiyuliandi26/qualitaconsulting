@@ -49,7 +49,13 @@
                                         <div class="dropdown-divider"></div>
                                         <a href="<?php echo base_url()."administrator/peserta/results/additional_report/{$items->ID}" ;?>" class="dropdown-item btn btn-outline-info" >Tambah Additional Report</a>
                                         <div class="dropdown-divider"></div>
-                                        <a href="<?php echo base_url()."administrator/peserta/results/generate_report/{$items->ID}" ;?>" class="dropdown-item btn btn-outline-info" >Lihat Hasil</a>
+                                        <a href="<?php echo base_url()."administrator/peserta/results/export_pdf/{$items->ID}" ;?>" class="dropdown-item btn btn-outline-info" >Export Hasil (PDF)</a>
+                                        
+                                        <div class="dropdown-divider"></div>
+									    <?php if($this->ion_auth->is_admin()): ?>
+									        <button onclick="send_email_hasil_peserta(<?php echo $items->ID; ?>)" class="dropdown-item">Email Hasil ke Peserta</button>
+									    <?php endif; ?>
+
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -95,6 +101,25 @@
     function send_email_peserta(pesertaID){
         $.ajax({
             url:'<?php echo base_url()."/api/apipeserta/send_email_peserta";?>',
+            type: 'POST',
+            dataType: "json",
+            data: { pesertaID: pesertaID },
+            success: function (data) {
+                warningShow(data.message);
+                //console.log(data.emailMessage);
+            },
+            beforeSend: function(){
+                warningShow('Proses mengirim email....', true);
+            },
+            error:function(){
+                warningShow("Pengiriman email terjadi masalah.");
+            }
+        });
+    }
+
+    function send_email_hasil_peserta(pesertaID){
+        $.ajax({
+            url:'<?php echo base_url()."/api/apipeserta/send_email_hasil_peserta";?>',
             type: 'POST',
             dataType: "json",
             data: { pesertaID: pesertaID },

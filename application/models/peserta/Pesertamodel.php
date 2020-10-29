@@ -32,8 +32,8 @@ class Pesertamodel extends Basemodel{
         $client = new Clientmodel;
         $clientbatch = new Clientbatchmodel;
         $fieldList = (object)array(
-            "NamaPeserta" => 'Nama Peserta', 
-            "NamaBatch" => 'Nama Batch', 
+            "NamaPeserta" => 'Nama Peserta',
+            "NamaBatch" => 'Nama Batch',
             "NamaClient" => 'Nama Client',
             "JenisKelamin" => 'Jenis Kelamin',
             "TestDate" => 'Tanggal Tes',
@@ -81,8 +81,6 @@ class Pesertamodel extends Basemodel{
 
     public function get_data_pesertaonly_byid($id)
     {
-        $client = new Clientmodel;
-        $clientbatch = new Clientbatchmodel;
         $this->db->select(self::TABLE_PESERTA.'.*')
             ->from(self::TABLE_PESERTA)
             ->where(self::TABLE_PESERTA.'.ID', $id);
@@ -107,7 +105,7 @@ class Pesertamodel extends Basemodel{
         $query = $this->db->select('*')
             ->from(self::TABLE_PESERTA)
             ->where('BatchID', $clientBatchID);
-        
+
         return $query->get()->num_rows();
     }
 
@@ -115,27 +113,27 @@ class Pesertamodel extends Basemodel{
         $this->db->select("*")
             ->from(self::TABLE_PESERTA)
             ->where("BatchID", $batchID);
-        
+
         return $this->db->get()->result_object();
     }
 
-    public function create_data_peserta($object){ 
+    public function create_data_peserta($object){
         $generatedToken = random_string('alnum',20);
 
-        $this->db->set('BatchID', $object->BatchID); 
-        $this->db->set('Token', $generatedToken); 
-        $this->db->set('TokenGenerateDate', date('Y-m-d H:i:s')); 
-        $this->db->set('NamaPeserta', $object->NamaPeserta); 
-        $this->db->set('Email', $object->Email); 
-        $this->db->set('Handphone', $object->Handphone); 
-        $this->db->set('JenisKelamin', $object->JenisKelamin); 
-        $this->db->set('Usia', $object->Usia); 
-        $this->db->set('JabatanPekerjaan', $object->JabatanPekerjaan); 
-        $this->db->set('BidangPekerjaan', $object->BidangPekerjaan); 
-        $this->db->set('PernyataanID', $this->defaultPernyataanID); 
-        $this->db->set('Jawaban', $this->defaultAnswer); 
-        $this->db->set('TestDate', date('Y-m-d')); 
-        $this->db->set('TestStatus', $this->defaultTestStatus); 
+        $this->db->set('BatchID', $object->BatchID);
+        $this->db->set('Token', $generatedToken);
+        $this->db->set('TokenGenerateDate', date('Y-m-d H:i:s'));
+        $this->db->set('NamaPeserta', $object->NamaPeserta);
+        $this->db->set('Email', $object->Email);
+        $this->db->set('Handphone', $object->Handphone);
+        $this->db->set('JenisKelamin', $object->JenisKelamin);
+        $this->db->set('Usia', $object->Usia);
+        $this->db->set('JabatanPekerjaan', $object->JabatanPekerjaan);
+        $this->db->set('BidangPekerjaan', $object->BidangPekerjaan);
+        $this->db->set('PernyataanID', $this->defaultPernyataanID);
+        $this->db->set('Jawaban', $this->defaultAnswer);
+        $this->db->set('TestDate', date('Y-m-d'));
+        $this->db->set('TestStatus', $this->defaultTestStatus);
         $this->db->set('TestDuration', $this->defaultTestDuration);
         $this->db->set('CreatedDate', date('Y-m-d H:i:s'));
 
@@ -148,7 +146,7 @@ class Pesertamodel extends Basemodel{
         }
     }
 
-    public function update_data_peserta($object){      
+    public function update_data_peserta($object){
         //$this->db->set('LastModifiedDate', date('Y-m-d H:i:s'));
         $object->LastModifiedDate = date('Y-m-d H:i:s');
         $this->db->where('ID', $object->ID);
@@ -161,10 +159,10 @@ class Pesertamodel extends Basemodel{
         }
     }
 
-    public function update_data_jawaban_peserta($id, $object){      
-        $this->db->set('Jawaban', $object->Jawaban); 
-        $this->db->set('TestDuration', $object->TestDuration); 
-        $this->db->set('TestStatus', $object->TestStatus); 
+    public function update_data_jawaban_peserta($id, $object){
+        $this->db->set('Jawaban', $object->Jawaban);
+        $this->db->set('TestDuration', $object->TestDuration);
+        $this->db->set('TestStatus', $object->TestStatus);
         $this->db->set('LastModifiedDate', date('Y-m-d H:i:s'));
         $this->db->where('ID', $id);
         if($this->db->update(self::TABLE_PESERTA)){
@@ -176,7 +174,7 @@ class Pesertamodel extends Basemodel{
     }
 
     public function update_data_email_peserta($id){
-        $this->db->set('EmailSent', true); 
+        $this->db->set('EmailSent', true);
         $this->db->set('LastModifiedDate', date('Y-m-d H:i:s'));
         $this->db->where('ID', $id);
         if($this->db->update(self::TABLE_PESERTA)){
@@ -190,7 +188,7 @@ class Pesertamodel extends Basemodel{
     public function get_jmlpeserta_by_batchid($batchID) {
         $this->db->from(self::TABLE_PESERTA)
             ->where("BatchID", $batchID);
-            
+
         return $this->db->count_all_results();
     }
 
@@ -222,29 +220,32 @@ class Pesertamodel extends Basemodel{
             ->from(self::TABLE_PESERTA)
             ->where('Token', $token)
             ->limit(1);
-        
+
         return $this->db->get()->row_object();
     }
 
-    public function send_email_peserta($pesertaID){        
+    public function send_email_peserta($pesertaID){
         $this->load->library('email');
 
         $getPeserta = $this->get_data_byid($pesertaID);
         $tokenDateExpired = new DateTime($getPeserta->TestDate);
         $tokenDateExpired->add(new DateInterval('P6M'));
         $data['getPeserta'] = $getPeserta;
-        $html = $this->load->view("peserta/email-profile", $data, TRUE);        
-        
-        $this->email->from('admin@qualitaconsulting.co.id', 'Admin Qualita Consulting');
+        $html = $this->load->view("peserta/email-profile", $data, TRUE);
+
+        $this->email->from($this->config->item("adminEmail"), $this->config->item("nameEmail"));
         $this->email->to($getPeserta->Email);
-        $this->email->subject('Data Peserta Qualita Profiling');
+        $this->email->bcc($this->config->item("adminEmail"));
+        $this->email->subject('Data Peserta Profiling Qualita');
         $this->email->message($html);
-        
+
         if($this->email->send(FALSE)){
+			$this->logging->email_sent($getPeserta->NamaPeserta, $getPeserta->Email, "Data Peserta | Success");
             return TRUE;
-        }else{
-            return FALSE;
-        }
+		}else{
+		    $this->logging->email_sent($getPeserta->NamaPeserta, $getPeserta->Email, "Data Peserta | Gagal", $this->email->print_debugger());
+		    return FALSE;
+		}
     }
 }
 ?>
