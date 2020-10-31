@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-$config['base_url'] = 'https://dev.qualitaconsulting.co.id';
+$config['base_url'] = 'https://profiling.qualitaconsulting.co.id';
 
 /*
 |--------------------------------------------------------------------------
@@ -402,7 +402,7 @@ $config['sess_regenerate_destroy'] = FALSE;
 |
 */
 $config['cookie_prefix']	= 'qualita';
-$config['cookie_domain']	= 'dev.qualitaconsulting.co.id';
+$config['cookie_domain']	= 'profiling.qualitaconsulting.co.id';
 $config['cookie_path']		= '/';
 $config['cookie_secure']	= TRUE;
 $config['cookie_httponly'] 	= FALSE;
