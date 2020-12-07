@@ -2,26 +2,27 @@
 
 class Listpeserta extends MY_Controller{
     public function index(){  
-        $data['data'] = NULL;
-        if($this->ion_auth->is_admin()){
-            $filterColumn = $this->input->post('filterColumn');
-            $filterOperator = $this->input->post('filterOperator');
-            $filterValue = $this->input->post('filterValue');
-            $sortBy = $this->input->post('sortBy');
-            $sortOrder = $this->input->post('sortOrder');
-            $pageSelected = $this->input->post('pageSelected');
-            $pageSizeSelected = $this->input->post('pageSizeSelected');
+        $defaultFilter = NULL;
 
-            if($filterColumn && $pageSelected && $pageSizeSelected){
-                $data['dataInfo'] = $this->pesertamodel->get_data_byfilterpage($pageSelected, $pageSizeSelected, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder);
-            }else{
-                $data['dataInfo'] = $this->pesertamodel->get_data_byfilterpage(1,10,'','','','', '');
-            }
-        }else{ 
-            if ($this->ion_auth->logged_in())
-		    {           
-                $data['data'] = $this->pesertamodel->get_data_current_user($this->current_user()->id);
-            }
+        if(!$this->ion_auth->is_admin()){
+            //print_r('test');
+            $user = $this->current_user();
+            //var_dump($user);
+            $defaultFilter = (object)array('column' => 'AdminAssignment', 'value' => $user->id);
+        }
+
+        $filterColumn = $this->input->post('filterColumn');
+        $filterOperator = $this->input->post('filterOperator');
+        $filterValue = $this->input->post('filterValue');
+        $sortBy = $this->input->post('sortBy');
+        $sortOrder = $this->input->post('sortOrder');
+        $pageSelected = $this->input->post('pageSelected');
+        $pageSizeSelected = $this->input->post('pageSizeSelected');
+
+        if($filterColumn && $pageSelected && $pageSizeSelected){
+            $data['dataInfo'] = $this->pesertamodel->get_data_byfilterpage($pageSelected, $pageSizeSelected, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder,$defaultFilter);
+        }else{
+            $data['dataInfo'] = $this->pesertamodel->get_data_byfilterpage(1,10,'','','','', '',$defaultFilter);
         }
 
         $this->load_administrator_view('/administrator/peserta/listpeserta/main', $data);

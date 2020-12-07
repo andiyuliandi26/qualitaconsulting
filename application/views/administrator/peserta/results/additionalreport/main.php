@@ -86,7 +86,7 @@
             </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Tutup</button>
+        <!--<button type="button" class="btn btn-outline-danger" data-dismiss="modal">Tutup</button>-->
         <button type="button" class="btn btn-outline-success" id="btnSave">Simpan</button>
       </div>
     </div>

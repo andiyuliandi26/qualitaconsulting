@@ -139,8 +139,11 @@ class Results extends MY_Controller
 		$mpdf->WriteHTML($data_body,\Mpdf\HTMLParserMode::HTML_BODY);
 		$mpdf->AddPage();
 		$mpdf->WriteHTML($data_style,\Mpdf\HTMLParserMode::HTML_BODY);
-		$mpdf->AddPage();
-		$mpdf->WriteHTML($data_additional,\Mpdf\HTMLParserMode::HTML_BODY);
+
+        if(count($resultAdditoinalReport) > 0){            
+		    $mpdf->AddPage();
+		    $mpdf->WriteHTML($data_additional,\Mpdf\HTMLParserMode::HTML_BODY);
+        }
 
 		////$mpdf->Output();
 
