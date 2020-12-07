@@ -36,7 +36,7 @@
 						<td style="width:10%"><?php echo htmlspecialchars($user->email,ENT_QUOTES,'UTF-8');?></td>
 						<td style="width:10%">
 							<?php foreach ($user->groups as $group):?>
-								<?php echo anchor("auth/edit_group/".$group->id, htmlspecialchars($group->name,ENT_QUOTES,'UTF-8')) ;?><br />
+                                <?= $group->name ?><br />
 							<?php endforeach?>
 						</td>
 						<!-- <td style="width:10%"><?php echo ($user->active) ? anchor("auth/deactivate/".$user->id, lang('index_active_link')) : anchor("auth/activate/". $user->id, lang('index_inactive_link'));?></td> -->
