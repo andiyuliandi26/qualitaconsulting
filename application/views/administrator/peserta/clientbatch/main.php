@@ -35,8 +35,8 @@
                         <td style="width:15%"><?php echo $items->NamaBatch; ?></td>
                         <td style="width:5%" class="text-center"><?php echo date_format(new DateTime($items->TanggalTest), 'd/m/yy'); ?></td>
                         <td style="width:10%" class="text-center"><?php echo "{$jamAwal} - {$jamAkhir}"; ?></td>
-                        <td style="width:5%" class="text-center"><?php echo $items->TotalPeserta; ?></td>
                         <td style="width:5%" class="text-center"><?php echo $items->DurasiTest; ?></td>
+                        <td style="width:5%" class="text-center"><?php echo $items->TotalPeserta; ?></td>
                         <td style="width:10%" class="text-center">
                             <?php echo $this->pesertamodel->get_jumlah_peserta_bybatch($items->ID); ?>
                         </td>
