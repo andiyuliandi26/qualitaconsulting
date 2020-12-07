@@ -106,9 +106,13 @@ class Basemodel extends CI_Model{
         return $groups;
     }
 
-    protected function return_data_filtered($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder, $filterColumnList, $sortColumnList){        
+    protected function return_data_filtered($page, $pageSize, $filterColumn, $filterValue, $filterOperator, $sortBy, $sortOrder, $filterColumnList, $sortColumnList, $defaultFilter = NULL){        
         $returnValue = new Basemodel;
         $currentPageforLimit = ($page - 1) * $pageSize;
+
+        if($defaultFilter != NULL){
+            $this->db->where($defaultFilter->column, $defaultFilter->value);
+        }
 
         if($filterColumn != '' && $filterValue != '' && $filterOperator != ''){
             switch($filterOperator){
@@ -132,9 +136,10 @@ class Basemodel extends CI_Model{
         }else{
             $this->db->order_by('ID','DESC');
         }
+        
+        //print_r($this->db->get_compiled_select());
         //Get query result
         $query = $this->db->get()->result_object();
-        
         //var_dump($this->db->last_query());
         $totalData = count($query);
         $totalPage = ceil($totalData / $pageSize);
