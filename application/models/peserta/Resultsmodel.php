@@ -503,7 +503,7 @@ class Resultsmodel extends Basemodel{
             $returnValue['message'] = "Hasil tes Anda Invalid, silahkan hubungi panitia untuk melaksanaan tes ulang.";
         }
 
-        //$this->pesertamodel->update_data_jawaban_peserta($pesertaID, $getPeserta);
+        $this->pesertamodel->update_data_jawaban_peserta($pesertaID, $getPeserta);
 
         if($this->db->trans_status() === FALSE){
             $this->db->trans_rollback();
