@@ -435,10 +435,26 @@ class Resultsmodel extends Basemodel{
 
         return $return;
     }
+
+    public function validasi_result($big5result, $facetresult){
+        foreach($big5result as $items){
+            if($items->TotalScore == 0){
+                return FALSE;
+            }
+        }
+
+        foreach($facetresult as $items){
+            if($items->TotalScore == 0){
+                return FALSE;
+            }
+        }
+
+        return TRUE;
+    }
     #endregion
     
     #region For Action
-    public function peserta_result_updatedb($pesertaID)
+    public function peserta_result_updatedb($pesertaID, $getPeserta)
     {
         $getAnswer = $this->get_peserta_answer($pesertaID);
         $getScore = $this->generate_score($getAnswer);
@@ -446,9 +462,12 @@ class Resultsmodel extends Basemodel{
         $big5result = $this->generate_big5_result($getScore);
         $facetresult = $this->generate_facet_result($getScore);
         $styleresult = $this->resultsmodel->generate_style_result($big5result);
-
+        $returnValue= array();
+        
         $this->db->trans_begin();
-        foreach($big5result as $items){
+
+        if($this->validasi_result($big5result, $facetresult)){
+            foreach($big5result as $items){
             if($this->peserta_result_big5_isnewrecord($items)){
                 $this->db->insert(self::TABLE_RESULT_BIG5, $items);
             }else{
@@ -457,30 +476,44 @@ class Resultsmodel extends Basemodel{
             }
         }
 
-        foreach($facetresult as $items){
-            if($this->peserta_result_facet_isnewrecord($items)){
-                $this->db->insert(self::TABLE_RESULT_FACET, $items);
-            }else{
-                $this->db->where("PesertaID = ".$items['PesertaID']." AND FacetID = ".$items['FacetID']);
-                $this->db->update(self::TABLE_RESULT_FACET, $items);
+            foreach($facetresult as $items){
+                if($this->peserta_result_facet_isnewrecord($items)){
+                    $this->db->insert(self::TABLE_RESULT_FACET, $items);
+                }else{
+                    $this->db->where("PesertaID = ".$items['PesertaID']." AND FacetID = ".$items['FacetID']);
+                    $this->db->update(self::TABLE_RESULT_FACET, $items);
+                }
             }
-        }
-
-        foreach($styleresult as $items){
-            if($this->peserta_result_style_isnewrecord($items)){
-                $this->db->insert(self::TABLE_RESULT_STYLE, $items);
-            }else{
-                $this->db->where("PesertaID = ".$items['PesertaID']." AND NormaStyleID = ".$items['NormaStyleID']);
-                $this->db->update(self::TABLE_RESULT_STYLE, $items);
+       
+            foreach($styleresult as $items){
+                if($this->peserta_result_style_isnewrecord($items)){
+                    $this->db->insert(self::TABLE_RESULT_STYLE, $items);
+                }else{
+                    $this->db->where("PesertaID = ".$items['PesertaID']." AND NormaStyleID = ".$items['NormaStyleID']);
+                    $this->db->update(self::TABLE_RESULT_STYLE, $items);
+                }
             }
+            $returnValue['teststatus'] = "Completed";
+            $returnValue['error'] = FALSE;
+            $returnValue['message'] = "Generate hasil tes berhasil.";
+        }else{
+            $getPeserta->TestStatus = "INVALID";
+            $returnValue['teststatus'] = "INVALID";
+            $returnValue['error'] = TRUE;
+            $returnValue['message'] = "Hasil tes Anda Invalid, silahkan hubungi panitia untuk melaksanaan tes ulang.";
         }
+        
+        $this->pesertamodel->update_data_jawaban_peserta($pesertaID, $getPeserta);
 
         if($this->db->trans_status() === FALSE){
             $this->db->trans_rollback();
-            return FALSE;
+            $returnValue['teststatus'] = "INVALID";
+            $returnValue['error'] = TRUE;
+            $returnValue['message'] = "Generate hasil tes Gagal.";
+            return $returnValue;
         }else{
             $this->db->trans_commit();
-            return TRUE;
+            return $returnValue;
         }
     }
 

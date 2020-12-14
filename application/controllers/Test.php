@@ -119,23 +119,27 @@ class Test extends MY_Controller {
             $getDefaultAnswer = $this->pernyataanmodel->get_default_answer();
 
             $getCurrentPage = $this->pesertamodel->get_page_test($getPeserta->Jawaban);
-            $getCurrentIndex = ($getCurrentPage - 1) * 3;
-            $getPernyataan = $this->pernyataanmodel->get_data_bypage($getCurrentPage);
-
-            //var_dump($getDefaultAnswer);
-            $pernyataanID = explode(",", $getPeserta->PernyataanID);
-            $jawaban = explode(",", $getPeserta->Jawaban);
-            $jawabanNew = array(4,5,2);
-
+            //$getCurrentIndex = ($getCurrentPage - 1) * 3;
             $data['peserta'] = $getPeserta;
-            $data['pernyataan'] = $getPernyataan;
-            $data['defaultAnswer'] = $getDefaultAnswer;
-            $data['currentPage'] = $getCurrentPage;
+            
+            if($getPeserta->TestStatus != 'Completed' && $getPeserta->TestStatus != 'INVALID'){
+                $getPernyataan = $this->pernyataanmodel->get_data_bypage($getCurrentPage);
 
-            $this->load->view("layouts/header");
-            $this->load->view("layouts/nav_global");
-            $this->load->view("peserta/progress", $data);
-            $this->load->view("layouts/footer");
+                //var_dump($getDefaultAnswer);
+				//$pernyataanID = explode(",", $getPeserta->PernyataanID);
+				//$jawaban = explode(",", $getPeserta->Jawaban);
+				//$jawabanNew = array(4,5,2);
+
+               
+                $data['pernyataan'] = $getPernyataan;
+                $data['defaultAnswer'] = $getDefaultAnswer;
+                $data['currentPage'] = $getCurrentPage;
+
+                $this->load_view("peserta/progress", $data);
+            }else{
+                $this->load_view("peserta/completed", $data);
+            }
+            
         }else{
             $data['heading'] = 'Forbiden';
             $data['message'] = 'Halaman tidak dapat diakses...!!';
@@ -260,6 +264,23 @@ class Test extends MY_Controller {
 		    $this->load_view("errors/html/error_general", $data);
 		}
     }
+
+    public function error_page(){
+        $tokenPeserta = $this->input->post('tokenPeserta', true);
+        if($tokenPeserta !== NULL){
+            $getPesertaByToken = $this->pesertamodel->get_data_bytoken($tokenPeserta);
+
+            $data['peserta'] = $getPesertaByToken;
+            $data['message'] = $this->input->post('message', true);
+
+            $this->load_view("administrator/peserta/results/error_page", $data);
+		    //echo $this->email->print_debugger();
+		}else{
+		    $data['heading'] = 'Forbiden';
+		    $data['message'] = 'Halaman tidak dapat diakses...!!';
+		    $this->load_view("errors/html/error_general", $data);
+		}
+    }
     #endregion
 
     public function result() {
@@ -305,7 +326,10 @@ class Test extends MY_Controller {
                         $this->load_view('peserta/profile', $data);
                         break;
                     case 'Completed':
-                        $this->load_view("peserta/hasiltest", $data);
+                        $this->load_view("peserta/completed", $data);
+                        break;
+                    case 'INVALID':
+                        $this->load_view("peserta/completed", $data);
                         break;
                 }
             } else {
