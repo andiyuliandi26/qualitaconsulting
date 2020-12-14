@@ -366,6 +366,7 @@ class Resultsmodel extends Basemodel{
 
             if($big5Result[$big5LeftValue]['LfsResult'] != self::LFS_AVERAGE && $big5Result[$big5RightValue]['LfsResult'] != self::LFS_AVERAGE)
             {
+                
                 array_push($style_assignment, array(
                     'PesertaID' => $big5Result[$big5LeftValue]['PesertaID'],
                     'StyleID' => $md_style[$i]['ID'],
@@ -382,7 +383,8 @@ class Resultsmodel extends Basemodel{
 
         foreach($style_assignment as $items)
         {
-            $getResult = $this->get_style_result($items['StyleID'], $items['Big5LeftLfs'], $items['Big5RightLfs']);
+            //var_dump($items['StyleID']." | ".$items['Big5LeftValue']." | ".$items['Big5RightValue']);
+            $getResult = $this->get_style_result($items['StyleID'], $items['Big5LeftValue'], $items['Big5RightValue']);
             array_push($return, array(
                 'PesertaID' => $items['PesertaID'],
                 //'StyleID' => $getResult->StyleID,
@@ -399,7 +401,7 @@ class Resultsmodel extends Basemodel{
 
     private function get_style_result($styleID, $big5LeftValue, $big5RightValue)
     {
-        $where = "StyleID = {$styleID} AND ".self::TABLE_NORMA_STYLE.".Big5LeftLfs = '{$big5LeftValue}' AND ".self::TABLE_NORMA_STYLE.".Big5RightLfs = '{$big5RightValue}'";
+        $where = "StyleID = {$styleID} AND ".self::TABLE_NORMA_STYLE.".Big5LeftValue = '{$big5LeftValue}' AND ".self::TABLE_NORMA_STYLE.".Big5RightValue = '{$big5RightValue}'";
         $this->db->select(self::TABLE_NORMA_STYLE.'.*, '.self::TABLE_STYLE_PARAMETER.'.Style')
                 ->from(self::TABLE_NORMA_STYLE)
                 ->join(self::TABLE_STYLE_PARAMETER, self::TABLE_STYLE_PARAMETER.'.ID = '.self::TABLE_NORMA_STYLE.'.StyleID')
