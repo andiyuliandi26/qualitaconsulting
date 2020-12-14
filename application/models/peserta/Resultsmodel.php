@@ -438,13 +438,13 @@ class Resultsmodel extends Basemodel{
 
     public function validasi_result($big5result, $facetresult){
         foreach($big5result as $items){
-            if($items->TotalScore == 0){
+            if($items['TotalScore'] == 0){
                 return FALSE;
             }
         }
 
         foreach($facetresult as $items){
-            if($items->TotalScore == 0){
+            if($items['TotalScore'] == 0){
                 return FALSE;
             }
         }
@@ -468,13 +468,13 @@ class Resultsmodel extends Basemodel{
 
         if($this->validasi_result($big5result, $facetresult)){
             foreach($big5result as $items){
-            if($this->peserta_result_big5_isnewrecord($items)){
-                $this->db->insert(self::TABLE_RESULT_BIG5, $items);
-            }else{
-                $this->db->where("PesertaID = ".$items['PesertaID']." AND Big5ID = ".$items['Big5ID']);
-                $this->db->update(self::TABLE_RESULT_BIG5, $items);
+                if($this->peserta_result_big5_isnewrecord($items)){
+                    $this->db->insert(self::TABLE_RESULT_BIG5, $items);
+                }else{
+                    $this->db->where("PesertaID = ".$items['PesertaID']." AND Big5ID = ".$items['Big5ID']);
+                    $this->db->update(self::TABLE_RESULT_BIG5, $items);
+                }
             }
-        }
 
             foreach($facetresult as $items){
                 if($this->peserta_result_facet_isnewrecord($items)){
@@ -502,8 +502,8 @@ class Resultsmodel extends Basemodel{
             $returnValue['error'] = TRUE;
             $returnValue['message'] = "Hasil tes Anda Invalid, silahkan hubungi panitia untuk melaksanaan tes ulang.";
         }
-        
-        $this->pesertamodel->update_data_jawaban_peserta($pesertaID, $getPeserta);
+
+        //$this->pesertamodel->update_data_jawaban_peserta($pesertaID, $getPeserta);
 
         if($this->db->trans_status() === FALSE){
             $this->db->trans_rollback();
