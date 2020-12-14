@@ -47,32 +47,33 @@ class Apipeserta extends RestController
             $getPeserta->TestDuration = $totalDuration;
             $getPeserta->TestStatus = $testStatus;
 
-            if($this->pesertamodel->update_data_jawaban_peserta($pesertaID, $getPeserta)){
-                if($testStatus == 'Completed'){
-                    if($this->resultsmodel->peserta_result_updatedb($pesertaID)){
-                        $response['objectResult'] = array('PesertaID' => $pesertaID , 'JawabanNew' => $jawaban , 'TotalDurration' => $totalDuration);
-                        $response['TestStatus'] = $testStatus;
-                        $response['status']=self::HTTP_OK;
-                        $response['error'] = FALSE;
-                        $response['message']='Pembuatan data hasil tes berhasil.';
-                    }else{
-                        $response['status'] =self::HTTP_BAD_REQUEST;
-                        $response['error'] = TRUE;
-                        $response['message'] ='Pembuatan data hasil tes gagal, silahkan hubungi Administrator.';
-                    }
-                }else{
+            if($testStatus == 'Completed'){
+                $getHasiltes = $this->resultsmodel->peserta_result_updatedb($pesertaID, $getPeserta);
+                //if(!$getHasiltes['error']){
+                    $response['objectResult'] = array('PesertaID' => $pesertaID , 'JawabanNew' => $jawaban , 'TotalDurration' => $totalDuration);
+                    $response['TestStatus'] = $getHasiltes['teststatus'];
+                    $response['status']=self::HTTP_OK;
+                    $response['error'] = $getHasiltes['error'];
+                    $response['message']= $getHasiltes['message'];
+				//}else{
+				//    $response['status'] =self::HTTP_BAD_REQUEST;
+				//    $response['error'] = TRUE;
+				//    $response['message'] ='Pembuatan data hasil tes gagal, silahkan hubungi Administrator.';
+				//}
+            }else{
+                if($this->pesertamodel->update_data_jawaban_peserta($pesertaID, $getPeserta)){
                     $response['objectResult'] = array('PesertaID' => $pesertaID , 'JawabanNew' => $jawaban , 'TotalDurration' => $totalDuration);
                     $response['TestStatus'] = $testStatus;
                     $response['status']=self::HTTP_OK;
                     $response['error'] = FALSE;
                     $response['message']='Update data jawaban berhasil.';
+                }else{
+                    $response['status']=self::HTTP_BAD_REQUEST;
+                    $response['error'] = TRUE;
+                    $response['message']='Update data jawaban gagal, silahkan hubungi Administrator.';
                 }
-            }else{
-                $response['status']=self::HTTP_BAD_REQUEST;
-                $response['error'] = TRUE;
-                $response['message']='Update data jawaban gagal, silahkan hubungi Administrator.';
+                
             }
-
         }else{
             $response['status'] = self::HTTP_BAD_REQUEST;
             $response['error'] = TRUE;
@@ -85,18 +86,20 @@ class Apipeserta extends RestController
 
     #region Peserta Result
     public function update_result_post(){
-        if($this->post('pesertaID') !== NULL){
-            if($this->resultsmodel->peserta_result_updatedb($this->post('pesertaID'))){
-                $response['error'] = FALSE;
-                $response['message']='Update data result peserta berhasil.';
-            }else{
-
-                $response['error']=TRUE;
-                $response['message']='Update data result peserta gagal.';
-            }
-
-            $response['status']=self::HTTP_OK;
-
+        $pesertaID = $this->post('pesertaID');
+        $getPeserta = $this->pesertamodel->get_data_byid($pesertaID);
+        if($getPeserta !== NULL){
+        $getHasiltes = $this->resultsmodel->peserta_result_updatedb($pesertaID, $getPeserta);
+            //if(!$getHasiltes['error']){
+                $response['TestStatus'] = $getHasiltes['teststatus'];
+                $response['status']=self::HTTP_OK;
+                $response['error'] = $getHasiltes['error'];
+                $response['message']= $getHasiltes['message'];
+			//}else{
+			//    $response['status'] =self::HTTP_BAD_REQUEST;
+			//    $response['error'] = TRUE;
+			//    $response['message'] ='Pembuatan data hasil tes gagal, silahkan hubungi Administrator.';
+			//}
         }else{
             $response['status'] = self::HTTP_BAD_REQUEST;
             $response['error'] = TRUE;

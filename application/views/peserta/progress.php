@@ -178,8 +178,20 @@
                             form2.submit();
                         }
                     }else{
-                        $('#loadingSpinner').hide();
-                        warningShow(data.message);
+                        if (data.TestStatus == 'INVALID') {
+                            var url3 = '<?php echo base_url().'test/error_page'; ?>';
+                            var form3 = $('<form action="' + url3 + '" method="post">' +
+                                '<input type="hidden" name="tokenTest" value="<?php echo $peserta->TokenTest; ?>" />' +
+                                '<input type="hidden" name="tokenPeserta" value="<?php echo $peserta->Token; ?>" />' +
+                                '<input type="hidden" name="message" value="' + data.message + '" />' +
+                                '</form>');
+                            $('body').append(form3);
+                            form3.submit();
+                        } else {
+                            $('#loadingSpinner').hide();
+
+                            warningShow(data.message);
+                        }
                     }
                 }
             });
