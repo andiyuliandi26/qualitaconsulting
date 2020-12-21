@@ -15,11 +15,11 @@ echo form_open(); ?>
                     }
                 ?>
             </select>
-            <select class="custom-select col-md-1" id="filterOperator" name="filterOperator">
-                <option value="Equal" <?php echo ($dataInfo->filterOperator == "Equal") ? 'selected' : ''; ?>>Equal</option>
-                <option value="NotEqual" <?php echo ($dataInfo->filterOperator == "NotEqual") ? 'selected' : ''; ?>>Not Equal</option>
+            <select class="custom-select col-md-1" id="filterOperator" name="filterOperator">                
                 <option value="Like" <?php echo ($dataInfo->filterOperator == "Like") ? 'selected' : ''; ?>>Like</option>
                 <option value="NotLike" <?php echo ($dataInfo->filterOperator == "NotLike") ? 'selected' : ''; ?>>Not Like</option>
+                <option value="Equal" <?php echo ($dataInfo->filterOperator == "Equal") ? 'selected' : ''; ?>>Equal</option>
+                <option value="NotEqual" <?php echo ($dataInfo->filterOperator == "NotEqual") ? 'selected' : ''; ?>>Not Equal</option>
             </select>
             <input type="text" class="form-control col-md-3" placeholder="Search term" id="filterValue" name="filterValue" value="<?php echo $dataInfo->filterValue; ?>" autocomplete="off">
             <button type="submit" class="btn btn-primary" id="submit" >Cari</button>

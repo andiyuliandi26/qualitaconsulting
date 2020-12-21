@@ -62,6 +62,7 @@
                             <label for="iPekerjaan">Bidang Pekerjaan</label>
                             <input name="iPekerjaan" type="text" class="form-control col-sm-12 col-md-8 col-lg-6" onchange="$('#iPekerjaanConfirm').val($(this).val());" 
                                 id="iPekerjaan" required autocomplete="off" />
+                            <small id="iPekerjaanHelp" class="form-text text-muted">Contoh bidang pekerjaan: Sales, Konsultan, HR, dll. </small>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary d-none" id="btnSubmit">Submit</button>

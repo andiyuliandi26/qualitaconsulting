@@ -30,7 +30,7 @@ class Results extends MY_Controller
         $facetsummaryresult = $this->resultsmodel->generate_facet_summary_result($facetresult);
         $styleresult = $this->resultsmodel->generate_style_result($big5result);
 
-        $data['answer'] = $getAnswer;
+        $data['peserta'] = $getAnswer;
         $data['getScore'] = $getScore;
         $data['result_big5'] = $big5result;
         $data['result_facet'] = $facetresult;

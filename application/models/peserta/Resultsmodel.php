@@ -94,9 +94,14 @@ class Resultsmodel extends Basemodel{
 
     public function get_peserta_answer($pesertaID)
     {
-        $this->db->select(self::TABLE_PESERTA.'.*')
-                ->from(self::TABLE_PESERTA)
-                ->where(self::TABLE_PESERTA.'.ID = '.$pesertaID);
+		//$this->db->select(self::TABLE_PESERTA.'.*')
+		//        ->from(self::TABLE_PESERTA)
+		//        ->where(self::TABLE_PESERTA.'.ID = '.$pesertaID);
+        $this->db->select(self::TABLE_PESERTA.'.*,'.self::TABLE_CLIENT.'.NamaClient, '.self::TABLE_CLIENT_BATCH.'.NamaBatch');
+                        $this->db->from(self::TABLE_PESERTA);
+                        $this->db->join(self::TABLE_CLIENT_BATCH, self::TABLE_CLIENT_BATCH.'.ID = '.self::TABLE_PESERTA.'.BatchID');
+                        $this->db->join(self::TABLE_CLIENT, self::TABLE_CLIENT.'.ID = '.self::TABLE_CLIENT_BATCH.'.ClientID');
+                        $this->db->where(self::TABLE_PESERTA.'.ID = '.$pesertaID);
 
         return  $this->db->get()->row_object();  
     }
@@ -131,6 +136,7 @@ class Resultsmodel extends Basemodel{
                 'FacetID' => $md_pernyataan[$search]['FacetID'],
                 'FacetDesc' => $md_pernyataan[$search]['FacetDesc'],
                 'PernyataanID' => $pernyataanID[$i],
+                'Pernyataan' => $md_pernyataan[$search]['Redaksi'],
                 'Jawaban' => $jawaban[$i],
                 'Score' => $md_pernyataan[$search]['Score'.$jawaban[$i]],
                 
