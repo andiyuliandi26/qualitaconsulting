@@ -9,15 +9,22 @@
         <table width="100%" class="table table-bordered table-striped">
             <thead class="thead-dark">
                 <tr class="text-center">
-                    <th>Action</th>
-                    <th>Nama Client</th>
-                    <th>Nama Batch</th>
-                    <th>Tanggal Test</th>
-                    <th>Jam</th>
-                    <th>Durasi Test</th>                    
-                    <th>Total Peserta</th>
-                    <th>Peserta Terdaftar</th>
-                    <th>Token</th>
+                    <th rowspan="2">Action</th>
+                    <th rowspan="2">Nama Client</th>
+                    <th rowspan="2">Nama Batch</th>
+                    <th rowspan="2">Tanggal Tes</th>
+                    <th rowspan="2">Jam</th>
+                    <th rowspan="2">Durasi Tes</th>                    
+                    <th colspan="6">Total Peserta</th>
+                    <th rowspan="2">Token</th>
+                </tr>
+                <tr class="text-center">
+                    <th>Alokasi</th>                    
+                    <th>Terdaftar</th>
+                    <th>Profile</th>
+                    <th>Progress</th>
+                    <th>Completed</th>
+                    <th>INVALID</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,6 +46,18 @@
                         <td style="width:5%" class="text-center"><?php echo $items->TotalPeserta; ?></td>
                         <td style="width:10%" class="text-center">
                             <?php echo $this->pesertamodel->get_jumlah_peserta_bybatch($items->ID); ?>
+                        </td>
+                        <td style="width:10%" class="text-center">
+                            <?php echo $this->pesertamodel->get_jumlah_peserta_bybatch_bystatus($items->ID, "Profile"); ?>
+                        </td>
+                        <td style="width:10%" class="text-center">
+                            <?php echo $this->pesertamodel->get_jumlah_peserta_bybatch_bystatus($items->ID, "Progress"); ?>
+                        </td>
+                        <td style="width:10%" class="text-center">
+                            <?php echo $this->pesertamodel->get_jumlah_peserta_bybatch_bystatus($items->ID, "Completed"); ?>
+                        </td>
+                        <td style="width:10%" class="text-center">
+                            <?php echo $this->pesertamodel->get_jumlah_peserta_bybatch_bystatus($items->ID, "INVALID"); ?>
                         </td>
                         <td style="width:15%" class="text-center">
                             <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

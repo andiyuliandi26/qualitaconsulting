@@ -42,7 +42,12 @@ class Pernyataanmodel extends BaseModel{
     public function get_data_bypage($page)
     {
         $pageSize = 3;
-        $offset = ($page - 1) * $pageSize;
+        if($page <= 0){
+            $offset = 0;
+        }else{        
+            $offset = ($page - 1) * $pageSize;
+        }
+
         $this->db->select(self::TABLE_PERNYATAAN.'.*, '.self::TABLE_BIG5.'.Nama as Big5Desc, '.self::TABLE_FACET.'.Nama as FacetDesc')
                 ->from(self::TABLE_PERNYATAAN)
                 ->join(self::TABLE_BIG5, self::TABLE_PERNYATAAN.'.Big5ID = '.self::TABLE_BIG5.'.ID')

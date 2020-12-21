@@ -35,11 +35,12 @@
                                 </button>
                                 <div class="dropdown-menu">
                                     <?php if($this->ion_auth->is_admin()): ?>
-                                        <button OnClick="send_email_peserta(<?php echo $items->ID; ?>)" class="dropdown-item" >Email Data Peserta</button>                                    
-                                    <?php endif; ?>
-                                    <?php if($items->TestStatus == 'Completed'): ?>                                    
+                                        <button OnClick="send_email_peserta(<?php echo $items->ID; ?>)" class="dropdown-item" >Email Data Peserta</button>  
                                         <div class="dropdown-divider"></div>
                                         <a href="<?php echo base_url()."administrator/peserta/results/check_result/{$items->ID}" ;?>" class="dropdown-item btn btn-outline-info" >Cek Hasil</a>
+                                    <?php endif; ?>
+                                    <?php if($items->TestStatus == 'Completed'): ?>                                    
+                                       
                                         <div class="dropdown-divider"></div>
                                         <button class="dropdown-item" OnClick="update_peserta_result(<?php echo $items->ID; ?>)">Update Hasil</button>
                                     <?php if($this->ion_auth->is_admin()): ?>
@@ -65,7 +66,7 @@
                         <td style="width:5%"><?php echo $items->Email; ?></td>
                         <td style="width:5%"><?php echo $items->Handphone; ?></td>
                         <td style="width:10%"><?php echo $items->JenisKelamin; ?></td>
-                        <td style="width:10%" class="text-center"><?php echo date_format(new DateTime($items->TestDate), 'd/m/yy'); ?></td>
+                        <td style="width:10%" class="text-center"><?php echo date_format(new DateTime($items->CreatedDate), 'd/m/Y H:i'); ?></td>
                         <td style="width:10%" class="text-center"><?php echo $items->TestStatus; ?></td>
                         <td style="width:10%" class="text-center"><?php echo round($items->TestDuration / 60, 0); ?></td>
                         <td style="width:10%" class="text-left"><?php echo $items->username; ?></td>

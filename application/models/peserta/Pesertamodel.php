@@ -109,6 +109,15 @@ class Pesertamodel extends Basemodel{
         return $query->get()->num_rows();
     }
 
+    public function get_jumlah_peserta_bybatch_bystatus($clientBatchID, $status){
+        $query = $this->db->select('*')
+            ->from(self::TABLE_PESERTA)
+            ->where('BatchID', $clientBatchID)
+            ->where('TestStatus', $status);
+
+        return $query->get()->num_rows();
+    }
+
     public function get_peserta_by_batchid($batchID) {
         $this->db->select("*")
             ->from(self::TABLE_PESERTA)
